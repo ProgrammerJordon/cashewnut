@@ -1,0 +1,35 @@
+.main-view > img {
+    width: 100vw;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-download-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-download {
+    text-align: center;
+}
+
+.main-download > div {
+    margin-bottom: 40px;
+}
+
+.main-download-app {
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 15px;
+    border: 0px;
+    border-radius: 15px;
+    padding: 25px 80px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+}
