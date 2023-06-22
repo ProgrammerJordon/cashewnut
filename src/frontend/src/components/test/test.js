@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 // src 내에 있는 사진 파일은 컴포넌트 현재 경로에서 2개의 상위 경로로 이동해서 임포트 해야함
 import TestLogo from "../../logo512.png";
-// eslint-disable-next-line
-import test from './test.css';
 
 function Test(){
     const [hello, setHello] = useState('리액트에서 적은거임')

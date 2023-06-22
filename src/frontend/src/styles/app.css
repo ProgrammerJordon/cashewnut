@@ -11,3 +11,14 @@ div {
 h1 {
     margin : 0px;
 }
+
+.csButton {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+    width: 75px;
+    height: 75px;
+    border: 0px;
+    border-radius: 15px;
+}

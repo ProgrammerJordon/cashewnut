@@ -10,7 +10,7 @@ import MainD from "./components/main/mainD";
 import MainE from "./components/main/mainE";
 import MainF from "./components/main/mainF";
 import MainG from "./components/main/mainG";
-import MainH from "./components/main/mainH";
+import Footer from "./components/footer/footer";
 
 function App() {
     const [activeSlide, setActiveSlide] = useState(0);
@@ -42,6 +42,7 @@ function App() {
 
     return (
         <div style={{height: '100vh'}}>
+            <button className="csButton">상담버튼</button>
             <FullPage>
                 <Slide>
                     <div className={`section ${activeSlide === 0 ? 'active' : ''}`}>
@@ -81,7 +82,7 @@ function App() {
                 </Slide>
                 <Slide>
                     <div className={`section ${activeSlide === 6 ? 'active' : ''}`}>
-                        <MainH/>
+                        <Footer/>
                     </div>
                 </Slide>
                 {/* Add more slides as needed */}

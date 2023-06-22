@@ -1,0 +1,29 @@
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+}
+
+.company-info {
+    margin-top: 0px;
+}
+
+.company-info-bottom {
+    margin-top: 100px;
+}
+
+.company-info-bottom > button {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+    border: 0px;
+    border-radius: 15px;
+}
