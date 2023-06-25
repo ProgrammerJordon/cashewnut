@@ -26,7 +26,7 @@ function Footer() {
                     <div><h3> 😄 </h3></div>
                 </div>
                 <div className="company-info">
-                    <div><h1>인재영입</h1></div>
+                    <div><h1>채용공고</h1></div>
                     <div><h3>Go! Recruiting 😄</h3></div>
                     <div><h3> 😄 </h3></div>
                     <div><h3> 😄 </h3></div>

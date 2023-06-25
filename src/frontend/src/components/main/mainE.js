@@ -4,7 +4,7 @@ function MainE() {
     return (
         <div className="main-container">
             <div className="main-view">
-                <img src="./common4.png" alt="MainE-background"/>
+                <img className="main-view-picture" src="./common3.png" alt="MainE-background"/>
             </div>
         </div>
     )

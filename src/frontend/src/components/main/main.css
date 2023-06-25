@@ -1,19 +1,31 @@
-.main-view > img {
+html {
+    background: #2C2C2CFF;
+}
+
+.main-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-view > .main-view-picture {
     width: 100vw;
     height: 100vh;
 }
 
-.main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-view-pictureFirst {
+    width: 100vw;
     height: 100vh;
 }
 
+/* 다운로드 앱스토어 구글플레이 */
 .main-download-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .main-download {
@@ -33,3 +45,71 @@
     padding: 25px 80px;
     background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
 }
+
+.main-download-app > img {
+    width: 85px;
+    height: 85px;
+}
+/* 슬라이드 메인화면 */
+.prev-button {
+    position: absolute;
+    top: 350px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+    z-index: 999;
+}
+
+.next-button {
+    position: absolute;
+    top: 350px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+    z-index: 999;
+}
+
+/*메인 화면 우측 이동 버튼*/
+
+.csButton {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+    width: 75px;
+    height: 75px;
+    border: 0px;
+    border-radius: 15px;
+    z-index: 999;
+}
+
+.nav-button {
+    position: fixed;
+    display: flex;
+    bottom: 130px;
+    right: 30px;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 999;
+
+}
+
+.nav-button > div {
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0);
+}
+.nav-button > div > button {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+    border-radius: 30px;
+    border: 0px;
+}
+

@@ -4,7 +4,7 @@ function MainC() {
     return (
         <div className="main-container">
             <div className="main-view">
-                <img src="./common2.png" alt="MainC-background"/>
+                <img className="main-view-picture" src="./common1.png" alt="MainC-background"/>
             </div>
         </div>
     )
