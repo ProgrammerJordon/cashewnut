@@ -32,23 +32,19 @@ html {
     text-align: center;
 }
 
-.main-download > div {
-    margin-bottom: 40px;
-}
-
 .main-download-app {
     font-size: 25px;
     font-weight: bold;
     margin-right: 15px;
     border: 0px;
     border-radius: 15px;
-    padding: 25px 80px;
+    padding: 25px 70px;
     background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
 }
 
 .main-download-app > img {
-    width: 85px;
-    height: 85px;
+    width: 50px;
+    height: 50px;
 }
 /* 슬라이드 메인화면 */
 .prev-button {

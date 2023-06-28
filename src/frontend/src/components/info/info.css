@@ -1,0 +1,10 @@
+.info-view {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.info-view-img {
+    width: 80vw;
+    height: 40%;
+}
