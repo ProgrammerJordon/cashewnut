@@ -14,7 +14,7 @@
     text-align: center;
 }
 
-.cashflow-contents-buttons > button {
+.cashflow-contents-buttons > a > button {
     font-size: 20px;
     font-weight: bold;
     width: 150px;
@@ -22,5 +22,51 @@
     margin-right: 10px;
     text-align: center;
     border-radius: 15px;
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+}
+
+/* 알바계산기 */
+
+.cashflow-content-wage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow-content-worktime {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow-content-period {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow-content-extended-hours {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow-content-cases {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.cashflow-content-holiday-wage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow-content-holiday-wage-button {
+    background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
+}
+
+.cashflow-content-tax-range {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow-content-calculator > div > button {
     background: linear-gradient(135deg, rgb(253, 201, 84) 14.64%, rgb(251, 153, 42) 85.36%);
 }
