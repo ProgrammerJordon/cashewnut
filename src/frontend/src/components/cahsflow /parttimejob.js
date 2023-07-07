@@ -33,19 +33,19 @@ function PartTimeJob() {
         } else if (preType === 'H' && afterType === 'M') {
             totalAmt = totalAmt * (52 / 12);
         } else if (preType === 'H' && afterType === 'Y') {
-            totalAmt = totalAmt * 52;
+            totalAmt = ((wage * workTime * period) + (wage * extended)) * 52
         } else if (preType === 'D' && afterType === 'H') {
-            totalAmt = (totalAmt / period) / (workTime * period);
+            totalAmt = ((totalAmt / period) / workTime);
         } else if (preType === 'D' && afterType === 'W') {
-            totalAmt = (totalAmt / period) * period;
+            totalAmt = ((wage + (wage - (wage * taxRange))) * period);
         } else if (preType === 'D' && afterType === 'M') {
-            totalAmt = totalAmt * (52 / 12)
+            totalAmt = ((totalAmt + (totalAmt - (totalAmt * taxRange))) / (52 / 12));
         } else if (preType === 'D' && afterType === 'Y') {
-            totalAmt = totalAmt * 52
+            totalAmt = ((totalAmt + (totalAmt - (totalAmt * taxRange))) * 52);
         } else if (preType === 'W' && afterType === 'H') {
             totalAmt = totalAmt / (workTime * period);
         } else if (preType === 'W' && afterType === 'D') {
-            totalAmt = totalAmt / period;
+            totalAmt = ((totalAmt - (totalAmt - (totalAmt * taxRange))) / period);
         } else if (preType === 'W' && afterType === 'M') {
             totalAmt = (wage * (52 / 12)) + (((wage * (52 / 12)) - ((wage * (52 / 12)))) * taxRange)
         } else if (preType === 'W' && afterType === 'Y') {
