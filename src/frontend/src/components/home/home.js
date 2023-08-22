@@ -31,7 +31,9 @@ function Home() {
                 </div>
                 <div className="home-contents-container-center">
                     <div className="home-contents"><h1>포트폴리오</h1></div>
-                    <div className="home-contents"><h1>게시판</h1></div>
+                    <div className="home-contents"><h1>게시판</h1>
+                        <div>작업중</div>
+                    </div>
                 </div>
                 <div className="home-contents-container-right">
                     <div className="home-contents">

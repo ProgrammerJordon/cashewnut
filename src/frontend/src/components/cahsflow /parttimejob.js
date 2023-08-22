@@ -27,13 +27,13 @@ function PartTimeJob() {
         totalAmt = (((wage * workTime * period) + (wage * extended) + (((workTime * period / 40) * 8 * wage))) * taxRange);
 
         if (preType === 'H' && afterType === 'D') {
-            totalAmt = totalAmt / period;
+            totalAmt = (wage * workTime);
         } else if (preType === 'H' && afterType === 'W') {
             totalAmt = totalAmt * 1;
         } else if (preType === 'H' && afterType === 'M') {
             totalAmt = totalAmt * (52 / 12);
         } else if (preType === 'H' && afterType === 'Y') {
-            totalAmt = ((wage * workTime * period) + (wage * extended)) * 52
+            totalAmt = ((((wage * workTime * period) + ((workTime * period / 40) * 8 * wage)) * 52) + ((wage * extended) * 12));
         } else if (preType === 'D' && afterType === 'H') {
             totalAmt = ((totalAmt / period) / workTime);
         } else if (preType === 'D' && afterType === 'W') {
@@ -41,11 +41,11 @@ function PartTimeJob() {
         } else if (preType === 'D' && afterType === 'M') {
             totalAmt = ((totalAmt + (totalAmt - (totalAmt * taxRange))) / (52 / 12));
         } else if (preType === 'D' && afterType === 'Y') {
-            totalAmt = ((totalAmt + (totalAmt - (totalAmt * taxRange))) * 52);
+            totalAmt = ((((wage * workTime * period) + (wage * extended)) * 52) * taxRange);
         } else if (preType === 'W' && afterType === 'H') {
             totalAmt = totalAmt / (workTime * period);
         } else if (preType === 'W' && afterType === 'D') {
-            totalAmt = ((totalAmt - (totalAmt - (totalAmt * taxRange))) / period);
+            totalAmt = ((totalAmt + (totalAmt - (totalAmt * taxRange))) / period);
         } else if (preType === 'W' && afterType === 'M') {
             totalAmt = (wage * (52 / 12)) + (((wage * (52 / 12)) - ((wage * (52 / 12)))) * taxRange)
         } else if (preType === 'W' && afterType === 'Y') {
@@ -53,13 +53,13 @@ function PartTimeJob() {
         } else if (preType === 'M' && afterType === 'H') {
             totalAmt = ((((wage * taxRange) / (52 / 12)) / period) / workTime);
         } else if (preType === 'M' && afterType === 'D') {
-            totalAmt = (((wage* taxRange) / (52 / 12)) / period);
+            totalAmt = (((wage * taxRange) / (52 / 12)) / period);
         } else if (preType === 'M' && afterType === 'W') {
             totalAmt = ((wage * taxRange) / (52 / 12));
         } else if (preType === 'M' && afterType === 'Y') {
             totalAmt = (wage * 12) + ((wage * 12) - ((wage * 12)) * taxRange);
         } else if (preType === 'Y' && afterType === 'H') {
-            totalAmt = ((wage * taxRange) / 52) / 40;
+            totalAmt = ((wage * taxRange / 52) / (workTime * period));
         } else if (preType === 'Y' && afterType === 'D') {
             totalAmt = ((wage * taxRange) / 52) / 7;
         } else if (preType === 'Y' && afterType === 'W') {
@@ -83,14 +83,37 @@ function PartTimeJob() {
 
     useEffect(() => {
 
-        if((preType ==='W' || preType ==='M' || preType ==='Y') && (afterType === 'M' || afterType === 'Y')) {
-
+        if ((preType === 'Y') && (afterType === 'D' || afterType === 'W' || afterType === 'M')) {
             document.getElementById('worktime').disabled = true;
             document.getElementById('period').disabled = true;
             document.getElementById('extended').disabled = true;
             document.getElementById('holidayWageChangeY').disabled = true;
             document.getElementById('holidayWageChangeN').disabled = true;
-        }else {
+        } else if (preType === 'Y' && afterType === 'H') {
+            document.getElementById('worktime').disabled = false;
+            document.getElementById('period').disabled = false;
+            document.getElementById('extended').disabled = true;
+            document.getElementById('holidayWageChangeY').disabled = true;
+            document.getElementById('holidayWageChangeN').disabled = true;
+        } else if ((preType === 'M') && (afterType === 'W' || afterType === 'Y')) {
+            document.getElementById('worktime').disabled = true;
+            document.getElementById('period').disabled = true;
+            document.getElementById('extended').disabled = true;
+            document.getElementById('holidayWageChangeY').disabled = true;
+            document.getElementById('holidayWageChangeN').disabled = true;
+        } else if ((preType === 'W') && (afterType === 'M' || afterType === 'Y')) {
+            document.getElementById('worktime').disabled = true;
+            document.getElementById('period').disabled = true;
+            document.getElementById('extended').disabled = true;
+            document.getElementById('holidayWageChangeY').disabled = true;
+            document.getElementById('holidayWageChangeN').disabled = true;
+        } else if ((preType === 'D') && (afterType === 'M' || afterType === 'Y')) {
+            document.getElementById('holidayWageChangeY').disabled = true;
+            document.getElementById('holidayWageChangeN').disabled = true;
+        } else if ((preType === 'H') && (afterType === 'M' || afterType === 'Y')) {
+            document.getElementById('holidayWageChangeY').disabled = true;
+            document.getElementById('holidayWageChangeN').disabled = true;
+        } else {
             document.getElementById('worktime').disabled = false;
             document.getElementById('period').disabled = false;
             document.getElementById('extended').disabled = false;
@@ -171,9 +194,9 @@ function PartTimeJob() {
                             </div>
                         </div>
                         <div className="cashflow-content-wage">
-                            <div>{preType.valueOf()}</div>
-                            <div><input type="number" id="wage" name="wage" value={wage} onChange={wageChange}
-                                        placeholder="시급" step="10" min="0"/></div>
+                            <div><span>금액</span></div>
+                            <div><input type="number" id="wage" name="wage" value={wage} onChange={wageChange} step="10"
+                                        min="0"/></div>
                         </div>
                         <div className="cashflow-content-worktime">
                             <div>일일 근무시간</div>
@@ -202,14 +225,18 @@ function PartTimeJob() {
                         <div className="cashflow-content-holiday-wage" id="cashflow-content-holiday-wage">
                             <div>주휴수당</div>
                             <div>
-                                <button className={holidayWageButton ? "cashflow-content-holiday-wage-button" : ""} id="holidayWageChangeY"
-                                        value={holidayWage} onClick={holidayWageChangeY}>주휴수당 포함
-                                </button>
-                            </div>
-                            <div>
-                                <button className={holidayWageButton ? "" : "cashflow-content-holiday-wage-button"} id="holidayWageChangeN"
-                                        value={holidayWage} onClick={holidayWageChangeN}>주휴수당 미포함
-                                </button>
+                                <div>
+                                    <button className={holidayWageButton ? "cashflow-content-holiday-wage-button" : ""}
+                                            id="holidayWageChangeY"
+                                            value={holidayWage} onClick={holidayWageChangeY}>주휴수당 포함
+                                    </button>
+                                </div>
+                                <div>
+                                    <button className={holidayWageButton ? "" : "cashflow-content-holiday-wage-button"}
+                                            id="holidayWageChangeN"
+                                            value={holidayWage} onClick={holidayWageChangeN}>주휴수당 미포함
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div className="cashflow-content-tax-range">
@@ -227,9 +254,15 @@ function PartTimeJob() {
                                 <button onClick={Calculator}>계산하기</button>
                             </div>
                         </div>
+                        <div className="cashflow-content-total">
+                            <div>총계</div>
+                        </div>
                         <div className="cashflow-content-info">
-                            <div><span>{totalAmt}</span></div>
                             <div>info</div>
+                            <div><span>{totalAmt}</span></div>
+                        </div>
+                        <div>
+                            <div>info2</div>
                         </div>
                     </div>
                 </div>

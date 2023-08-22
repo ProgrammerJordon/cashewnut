@@ -1,3 +1,4 @@
+// Release Version - if you change version, under libraries will change too.
 plugins {
 	id 'java'
 	id 'war'
@@ -5,13 +6,15 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
+// group - 'biz' modules - ''
 group = 'biz'
 version = '0.0.1-SNAPSHOT'
 
+// Java JDK Version - '1.8' Fixed
 java {
 	sourceCompatibility = '1.8'
 }
-
+// Annotation Extends Form - Like @Lombok @Data
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -23,22 +26,25 @@ repositories {
 }
 
 dependencies {
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'junit:junit:4.13.1'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.postgresql:postgresql:42.3.0'
+	runtimeOnly 'com.h2database:h2:1.4.180'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// React base path = "/src/main/frontend"
 def frontendDir = "$projectDir/src/main/frontend"
 
