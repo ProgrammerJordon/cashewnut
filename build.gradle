@@ -39,6 +39,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'org.postgresql:postgresql:42.3.0'
 	runtimeOnly 'com.h2database:h2:1.4.180'
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 }
 
 tasks.named('test') {
