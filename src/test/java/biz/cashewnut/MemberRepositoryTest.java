@@ -19,7 +19,7 @@ public class MemberRepositoryTest {
     public void testMember() throws Exception {
         /* give */
         Member member = new Member();
-        member.setUsername("memberA");
+        member.setUsername("memberA11");
         /* when */
         Long saveId = memberRepository.save(member);
         Member findMember = memberRepository.find(saveId);
