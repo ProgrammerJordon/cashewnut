@@ -1,4 +1,4 @@
-package biz.jpa;
+package biz.cashewnut;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package biz.jpa;
+package biz.cashewnut;
 
 import lombok.Getter;
 import lombok.Setter;
