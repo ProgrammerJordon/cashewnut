@@ -1,4 +1,4 @@
-package biz.cashewnut;
+package biz.jpa;
 
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,7 @@
 package biz.cashewnut;
 
+import biz.jpa.Member;
+import biz.jpa.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,14 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 public class MemberRepositoryTest {
 
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     @Transactional
     public void testMember() throws Exception {
         /* give */
         Member member = new Member();
-        member.setUsername("memberA11");
+        member.setUsername("memberA");
         /* when */
         Long saveId = memberRepository.save(member);
         Member findMember = memberRepository.find(saveId);
