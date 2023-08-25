@@ -20,7 +20,15 @@ function CashFlow () {
                         <div className="cashflow-contents-buttons"><Link to="/interest" style={underLine}><button>이자계산기</button></Link></div>
                     </div>
                     <div className="cashflow-contents">
-                        <div className="cashflow-content"></div>
+                        <div className="cashflow-content">
+                            <div>
+                                <div>오른쪽 첫번째</div>
+                                <div>오른쪽 두번째</div>
+                            </div>
+                            <div>
+                                <div>왼쪽 첫번째</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
