@@ -3,11 +3,7 @@ package biz.cashewnut.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import biz.cashewnut.domain.Address;
-import biz.cashewnut.domain.Order;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +16,7 @@ public class Member {
     private String name;
     @Embedded
     private Address address;
+    private String phoneNumber;
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
