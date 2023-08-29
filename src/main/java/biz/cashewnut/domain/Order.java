@@ -1,7 +1,8 @@
 package biz.cashewnut.domain;
 
-import biz.cashewnut.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="orders")
 public class Order {
     @Id @GeneratedValue
@@ -45,4 +47,41 @@ public class Order {
         this.delivery = delivery;
         delivery.setOrder(this);
     }
+
+    // 생성메소드
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for(OrderItem orderItem : orderItems) {
+            order.addOrdrItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    /**
+     * 비지니스 로직
+     */
+    // 주문 취소
+    public void cancle() {
+        if(delivery.getStatus() == DeliveryStatus.COMP) {
+            throw new IllegalStateException("배송이 완료된 주문 건 입니다.");
+        }
+        this.setStatus(OrderStatus.CANCLE);
+        for(OrderItem orderItem : orderItems) {
+            orderItem.cancle();
+        }
+    }
+
+    // 전체 주문가격 조회
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for(OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
 }
