@@ -16,7 +16,6 @@ public class Member {
     private String name;
     @Embedded
     private Address address;
-    private String phoneNumber;
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
