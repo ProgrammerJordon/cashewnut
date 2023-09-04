@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -44,10 +44,16 @@ public class MemberService {
 
     /**
      * 단건조회
-     * @param id
+     * @param memberId
      * @return
      */
     public Member findOne(Long memberId) { //memberId
         return memberRepository.findOne(memberId);
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
     }
 }
