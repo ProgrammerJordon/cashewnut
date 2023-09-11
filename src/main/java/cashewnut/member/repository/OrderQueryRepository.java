@@ -26,7 +26,7 @@ public class OrderQueryRepository {
     }
 
     private List<OrderItemQueryDto> findOrderItems(Long orderId) {
-        return em.createQuery("select new biz.cashewnut.member.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count) from OrderItem oi join oi.item i where oi.order.id = :orderId")
+        return em.createQuery("select new cashewnut.member.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count) from OrderItem oi join oi.item i where oi.order.id = :orderId")
                 .setParameter("orderId", orderId)
                 .getResultList();
     }
