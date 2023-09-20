@@ -1,9 +1,7 @@
-package cashewnut.member.domain.item;
+package cashewnut.economy.user.member.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.member.domain.Category;
-import cashewnut.economy.user.member.domain.item.Movie;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMovie extends EntityPathBase<Movie> {
 
-    private static final long serialVersionUID = -245293455L;
+    private static final long serialVersionUID = -1551002760L;
 
     public static final QMovie movie = new QMovie("movie");
 
@@ -26,7 +24,7 @@ public class QMovie extends EntityPathBase<Movie> {
     public final StringPath actor = createString("actor");
 
     //inherited
-    public final ListPath<Category, cashewnut.member.domain.QCategory> categories = _super.categories;
+    public final ListPath<cashewnut.economy.user.member.domain.Category, cashewnut.economy.user.member.domain.QCategory> categories = _super.categories;
 
     public final StringPath director = createString("director");
 

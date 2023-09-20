@@ -26,20 +26,20 @@ public class OrderQueryRepository {
     }
 
     private List<OrderItemQueryDto> findOrderItems(Long orderId) {
-        return em.createQuery("select new cashewnut.member.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count) from OrderItem oi join oi.item i where oi.order.id = :orderId")
+        return em.createQuery("select new cashewnut.economy.user.member.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count) from OrderItem oi join oi.item i where oi.order.id = :orderId")
                 .setParameter("orderId", orderId)
                 .getResultList();
     }
 
     public List<OrderQueryDto> findOrders() {
-        return em.createQuery("select new cashewnut.member.dto.OrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address) from Order o join o.member m join o.delivery d", OrderQueryDto.class)
+        return em.createQuery("select new cashewnut.economy.user.member.dto.OrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address) from Order o join o.member m join o.delivery d", OrderQueryDto.class)
                 .getResultList();
     }
 
     public List<OrderQueryDto> findAllByDto_optimization() {
         List<OrderQueryDto> result = findOrders();
         List<Long> orderIds = result.stream().map(o -> o.getOrderId()).collect(Collectors.toList());
-        List<OrderItemQueryDto> orderItems = em.createQuery("select new cashewnut.member.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count) from OrderItem oi join oi.item i where oi.order.id in :orderIds", OrderItemQueryDto.class)
+        List<OrderItemQueryDto> orderItems = em.createQuery("select new cashewnut.economy.user.member.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count) from OrderItem oi join oi.item i where oi.order.id in :orderIds", OrderItemQueryDto.class)
                 .setParameter("orderIds", orderIds)
                 .getResultList();
         Map<Long, List<OrderItemQueryDto>> orderItemMap = orderItems.stream().collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
@@ -48,7 +48,7 @@ public class OrderQueryRepository {
     }
 
     public List<OrderFlatDto> findAllByDto_flat() {
-        return em.createQuery("select new cashewnut.member.dto.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count) from Order o join o.member m join o.delivery d join o.orderItems oi join oi.item i", OrderFlatDto.class)
+        return em.createQuery("select new cashewnut.economy.user.member.dto.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count) from Order o join o.member m join o.delivery d join o.orderItems oi join oi.item i", OrderFlatDto.class)
                 .getResultList();
     }
 }

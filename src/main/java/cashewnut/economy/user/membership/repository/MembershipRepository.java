@@ -22,7 +22,7 @@ public interface MembershipRepository extends JpaRepository<Membership, Long>, M
     @Query("select m from Membership m where m.userName = :userName and m.age = :age")
     List<Membership> findMembership(@Param("userName") String useName, @Param("age") int age);
 
-    @Query("select new cashewnut.membership.dto.MembershipDto(m.id, m.userName, t.name) from Membership m join m.team t")
+    @Query("select new cashewnut.economy.user.membership.dto.MembershipDto(m.id, m.userName, t.name) from Membership m join m.team t")
     List<MembershipDto> findMembershipDto();
 
     @Query("select m from Membership m where m.userName in :names")

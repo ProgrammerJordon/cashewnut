@@ -1,9 +1,7 @@
-package cashewnut.member.domain;
+package cashewnut.economy.user.member.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.member.domain.Category;
-import cashewnut.economy.user.member.domain.item.Item;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -18,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QCategory extends EntityPathBase<Category> {
 
-    private static final long serialVersionUID = -529616358L;
+    private static final long serialVersionUID = 1131592929L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
@@ -28,7 +26,7 @@ public class QCategory extends EntityPathBase<Category> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final ListPath<Item, cashewnut.member.domain.item.QItem> items = this.<Item, cashewnut.member.domain.item.QItem>createList("items", Item.class, cashewnut.member.domain.item.QItem.class, PathInits.DIRECT2);
+    public final ListPath<cashewnut.economy.user.member.domain.item.Item, cashewnut.economy.user.member.domain.item.QItem> items = this.<cashewnut.economy.user.member.domain.item.Item, cashewnut.economy.user.member.domain.item.QItem>createList("items", cashewnut.economy.user.member.domain.item.Item.class, cashewnut.economy.user.member.domain.item.QItem.class, PathInits.DIRECT2);
 
     public final StringPath name = createString("name");
 

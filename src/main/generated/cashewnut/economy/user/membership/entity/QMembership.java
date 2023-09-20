@@ -1,8 +1,7 @@
-package cashewnut.membership.entity;
+package cashewnut.economy.user.membership.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.membership.entity.Membership;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,25 +16,31 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMembership extends EntityPathBase<Membership> {
 
-    private static final long serialVersionUID = 352845999L;
+    private static final long serialVersionUID = 1112840758L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QMembership membership = new QMembership("membership");
 
-    public final QJpaBaseEntity _super = new QJpaBaseEntity(this);
+    public final cashewnut.economy.common.QTrack _super = new cashewnut.economy.common.QTrack(this);
 
     public final NumberPath<Integer> age = createNumber("age", Integer.class);
+
+    //inherited
+    public final StringPath createdBy = _super.createdBy;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final QTeam team;
+    //inherited
+    public final StringPath lastModifiedBy = _super.lastModifiedBy;
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> updatedDate = _super.updatedDate;
+    public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
+
+    public final QTeam team;
 
     public final StringPath userName = createString("userName");
 

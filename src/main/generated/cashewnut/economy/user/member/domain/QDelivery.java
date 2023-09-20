@@ -1,9 +1,7 @@
-package cashewnut.member.domain;
+package cashewnut.economy.user.member.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.member.domain.Delivery;
-import cashewnut.economy.user.member.domain.DeliveryStatus;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -18,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QDelivery extends EntityPathBase<Delivery> {
 
-    private static final long serialVersionUID = 243339536L;
+    private static final long serialVersionUID = 1904548823L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

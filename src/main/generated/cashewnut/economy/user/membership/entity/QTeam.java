@@ -1,9 +1,7 @@
-package cashewnut.membership.entity;
+package cashewnut.economy.user.membership.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.membership.entity.Membership;
-import cashewnut.economy.user.membership.entity.Team;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -18,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QTeam extends EntityPathBase<Team> {
 
-    private static final long serialVersionUID = -1589734922L;
+    private static final long serialVersionUID = 71474365L;
 
     public static final QTeam team = new QTeam("team");
 

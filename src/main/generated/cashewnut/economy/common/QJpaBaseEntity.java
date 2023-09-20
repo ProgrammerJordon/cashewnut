@@ -1,8 +1,7 @@
-package cashewnut.membership.entity;
+package cashewnut.economy.common;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.common.JpaBaseEntity;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultSupertypeSerializer")
 public class QJpaBaseEntity extends EntityPathBase<JpaBaseEntity> {
 
-    private static final long serialVersionUID = 1782744278L;
+    private static final long serialVersionUID = -1355465470L;
 
     public static final QJpaBaseEntity jpaBaseEntity = new QJpaBaseEntity("jpaBaseEntity");
 

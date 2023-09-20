@@ -2,8 +2,8 @@ package cashewnut.economy.user.member.repository;
 
 import cashewnut.economy.user.member.domain.Order;
 import cashewnut.economy.user.member.domain.OrderStatus;
-import cashewnut.member.domain.QMember;
-import cashewnut.member.domain.QOrder;
+import cashewnut.economy.user.member.domain.QMember;
+import cashewnut.economy.user.member.domain.QOrder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +59,7 @@ public class OrderRepository {
     }
 
     public List<OrderSimpleQureyDto> findOrderDtos() {
-        return em.createQuery("select new cashewnut.member.repository.OrderSimpleQureyDto(o.id, m.name, o.orderDate, o.status, d.address) from Order o join o.member m join o.delivery d", OrderSimpleQureyDto.class)
+        return em.createQuery("select new cashewnut.economy.user.member.repository.OrderSimpleQureyDto(o.id, m.name, o.orderDate, o.status, d.address) from Order o join o.member m join o.delivery d", OrderSimpleQureyDto.class)
                 .getResultList();
     }
 

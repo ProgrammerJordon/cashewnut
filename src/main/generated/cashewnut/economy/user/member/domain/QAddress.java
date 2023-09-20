@@ -1,8 +1,7 @@
-package cashewnut.member.domain;
+package cashewnut.economy.user.member.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.member.domain.Address;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QAddress extends BeanPath<Address> {
 
-    private static final long serialVersionUID = -58027176L;
+    private static final long serialVersionUID = 688296881L;
 
     public static final QAddress address = new QAddress("address");
 

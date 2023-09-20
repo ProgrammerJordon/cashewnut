@@ -1,9 +1,7 @@
-package cashewnut.member.domain.item;
+package cashewnut.economy.user.member.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.member.domain.Category;
-import cashewnut.economy.user.member.domain.item.Album;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QAlbum extends EntityPathBase<Album> {
 
-    private static final long serialVersionUID = -256483920L;
+    private static final long serialVersionUID = -1562193225L;
 
     public static final QAlbum album = new QAlbum("album");
 
@@ -26,7 +24,7 @@ public class QAlbum extends EntityPathBase<Album> {
     public final StringPath artist = createString("artist");
 
     //inherited
-    public final ListPath<Category, cashewnut.member.domain.QCategory> categories = _super.categories;
+    public final ListPath<cashewnut.economy.user.member.domain.Category, cashewnut.economy.user.member.domain.QCategory> categories = _super.categories;
 
     public final StringPath etc = createString("etc");
 

@@ -1,9 +1,7 @@
-package cashewnut.member.domain.item;
+package cashewnut.economy.user.member.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.economy.user.member.domain.Category;
-import cashewnut.economy.user.member.domain.item.Book;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QBook extends EntityPathBase<Book> {
 
-    private static final long serialVersionUID = -700977272L;
+    private static final long serialVersionUID = -743096927L;
 
     public static final QBook book = new QBook("book");
 
@@ -26,7 +24,7 @@ public class QBook extends EntityPathBase<Book> {
     public final StringPath author = createString("author");
 
     //inherited
-    public final ListPath<Category, cashewnut.member.domain.QCategory> categories = _super.categories;
+    public final ListPath<cashewnut.economy.user.member.domain.Category, cashewnut.economy.user.member.domain.QCategory> categories = _super.categories;
 
     //inherited
     public final NumberPath<Long> id = _super.id;
