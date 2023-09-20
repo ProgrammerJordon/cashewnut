@@ -2,6 +2,8 @@ package cashewnut.membership.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import cashewnut.economy.user.membership.entity.Membership;
+import cashewnut.economy.user.membership.entity.Team;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

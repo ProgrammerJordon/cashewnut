@@ -2,6 +2,8 @@ package cashewnut.member.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import cashewnut.economy.user.member.domain.Member;
+import cashewnut.economy.user.member.domain.Order;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

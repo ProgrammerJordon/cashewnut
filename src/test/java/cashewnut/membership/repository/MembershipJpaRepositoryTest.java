@@ -1,8 +1,11 @@
 package cashewnut.membership.repository;
 
-import cashewnut.membership.dto.MembershipDto;
-import cashewnut.membership.entity.Membership;
-import cashewnut.membership.entity.Team;
+import cashewnut.economy.user.membership.dto.MembershipDto;
+import cashewnut.economy.user.membership.entity.Membership;
+import cashewnut.economy.user.membership.entity.Team;
+import cashewnut.economy.user.membership.repository.MembershipJpaRepository;
+import cashewnut.economy.user.membership.repository.MembershipRepository;
+import cashewnut.economy.user.membership.repository.TeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -195,5 +196,54 @@ public class MembershipJpaRepositoryTest {
          */
         // then
         assertThat(resultCount).isEqualTo(3);
+    }
+    
+    @Test
+    public void QueryHints() throws Exception {
+        // given
+        Membership membership = new Membership("memberA", 10);
+        membershipRepository.save(membership);
+        em.flush();
+        em.clear();
+        // when
+        Membership findMembership = membershipRepository.findReadOnlyByUserName("memberA");
+        findMembership.setUserName("changeMemberNameA");
+        em.flush();
+        // then
+    }
+
+    @Test
+    public void Lock() throws Exception {
+        // given
+        Membership membership = new Membership("memberA", 10);
+        membershipRepository.save(membership);
+        em.flush();
+        em.clear();
+        // when
+        List<Membership> findMembership = membershipRepository.findLockByUserName("memberA");
+        // then
+    }
+
+    @Test
+    public void customRepository() throws Exception {
+        // given
+        List<Membership> result = membershipRepository.findMembershipCustom();
+        // when
+        // then
+    }
+    @Test
+    public void JpaBaseEntity() throws Exception {
+        Membership membership = new Membership("Member1", 10);
+        membershipRepository.save(membership);//@prePersist
+
+        Thread.sleep(2000);
+
+        membership.setUserName("changeMember1");//@preUdate
+
+        em.flush();
+        em.clear();
+
+        Membership findMembership = membershipRepository.findById(membership.getId()).get();
+
     }
 }

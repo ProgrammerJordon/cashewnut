@@ -103,25 +103,60 @@ public class DateUtil {
         return addYearMonthDay(strDate, 0, 0, day);
     }
 
-//    public static boolean checkDate(String strDate) {
-//        String date = validChkDate(strDate);
-//        String year = date.substring(0, 4);
-//        String month = date.substring(4, 6);
-//        String day = date.substring(6);
-//        return checkDate(year, month, day);
-//    }
+    public static boolean checkDate(String strDate) {
+        String date = validChkDate(strDate);
+        String year = date.substring(0, 4);
+        String month = date.substring(4, 6);
+        String day = date.substring(6);
+        return checkDate(year, month, day);
+    }
 
-//    public checkDate(String year, String month, String day) {
-//        return "";
-//    }
+    public static boolean checkDate(String year, String month, String day) {
 
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
+            Date result = formatter.parse(year + "." + month + "." + day);
+            String resultStr = formatter.format(result);
+            if (resultStr.equalsIgnoreCase(year + "." + month + "." + day)) {
+                return true;
+            }else {
+                return false;
+            }
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * 윤달 계산
+     * @param year
+     * @return
+     */
+    public String leapYear(int year) {
+        if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+            return "29";
+        }
+        return "28";
+    }
+
+    /**
+     * 윤년 여부
+     * @param year
+     * @return
+     */
+    public static boolean isLeapYear(int year) {
+        if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 오늘날짜 가져오는 함수 -시간까지(YYYY-MM-DD HH24:MI:ss포맷)
      * @return yyyy-MM-dd HH:mm:ss 형태의 오늘 날짜
      * ex> '2020-11-17 23:59:59'
      */
-    public static String getTodayTime(){
+    public static String getTodayTime() {
         SimpleDateFormat sdf = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date currentTime = new Date ();
         String today = sdf.format(currentTime);

@@ -2,6 +2,8 @@ package cashewnut.member.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import cashewnut.economy.user.member.domain.Category;
+import cashewnut.economy.user.member.domain.item.Movie;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -24,7 +26,7 @@ public class QMovie extends EntityPathBase<Movie> {
     public final StringPath actor = createString("actor");
 
     //inherited
-    public final ListPath<cashewnut.member.domain.Category, cashewnut.member.domain.QCategory> categories = _super.categories;
+    public final ListPath<Category, cashewnut.member.domain.QCategory> categories = _super.categories;
 
     public final StringPath director = createString("director");
 

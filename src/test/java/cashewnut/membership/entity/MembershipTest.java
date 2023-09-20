@@ -1,5 +1,7 @@
 package cashewnut.membership.entity;
 
+import cashewnut.economy.user.membership.entity.Membership;
+import cashewnut.economy.user.membership.entity.Team;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,8 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

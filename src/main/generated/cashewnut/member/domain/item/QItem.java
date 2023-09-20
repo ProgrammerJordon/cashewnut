@@ -2,6 +2,8 @@ package cashewnut.member.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import cashewnut.economy.user.member.domain.Category;
+import cashewnut.economy.user.member.domain.item.Item;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -20,7 +22,7 @@ public class QItem extends EntityPathBase<Item> {
 
     public static final QItem item = new QItem("item");
 
-    public final ListPath<cashewnut.member.domain.Category, cashewnut.member.domain.QCategory> categories = this.<cashewnut.member.domain.Category, cashewnut.member.domain.QCategory>createList("categories", cashewnut.member.domain.Category.class, cashewnut.member.domain.QCategory.class, PathInits.DIRECT2);
+    public final ListPath<Category, cashewnut.member.domain.QCategory> categories = this.<Category, cashewnut.member.domain.QCategory>createList("categories", Category.class, cashewnut.member.domain.QCategory.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

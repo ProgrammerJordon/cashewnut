@@ -2,6 +2,7 @@ package cashewnut.membership.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import cashewnut.economy.user.membership.entity.Membership;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -22,11 +23,19 @@ public class QMembership extends EntityPathBase<Membership> {
 
     public static final QMembership membership = new QMembership("membership");
 
+    public final QJpaBaseEntity _super = new QJpaBaseEntity(this);
+
     public final NumberPath<Integer> age = createNumber("age", Integer.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final QTeam team;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updatedDate = _super.updatedDate;
 
     public final StringPath userName = createString("userName");
 

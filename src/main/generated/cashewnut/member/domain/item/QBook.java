@@ -2,6 +2,8 @@ package cashewnut.member.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import cashewnut.economy.user.member.domain.Category;
+import cashewnut.economy.user.member.domain.item.Book;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -24,7 +26,7 @@ public class QBook extends EntityPathBase<Book> {
     public final StringPath author = createString("author");
 
     //inherited
-    public final ListPath<cashewnut.member.domain.Category, cashewnut.member.domain.QCategory> categories = _super.categories;
+    public final ListPath<Category, cashewnut.member.domain.QCategory> categories = _super.categories;
 
     //inherited
     public final NumberPath<Long> id = _super.id;

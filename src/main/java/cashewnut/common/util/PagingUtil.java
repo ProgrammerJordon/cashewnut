@@ -1,7 +1,7 @@
 package cashewnut.common.util;
 
-import cashewnut.common.vo.CommonVO;
-import cashewnut.common.vo.PageVO;
+import cashewnut.economy.common.Common;
+import cashewnut.economy.common.Paging;
 
 public class PagingUtil {
 
@@ -10,7 +10,7 @@ public class PagingUtil {
      * @param pageVO
      */
 
-    public static void setPaging(PageVO pageVO) {
+    public static void setPaging(Paging pageVO) {
         if(pageVO.getTotalRowCount() == 0) {
             pageVO.setTotalPages(1);
         }else if(pageVO.getTotalRowCount() % pageVO.getRowCountPerPage() > 0) {
@@ -27,7 +27,7 @@ public class PagingUtil {
      * @param commonVO - 페이징 VO
      * @param rowCountPerPage - 페이지별 레코드 수
      */
-    public static void setPaging(CommonVO commonVO, int rowCountPerPage) {
+    public static void setPaging(Common commonVO, int rowCountPerPage) {
 
         if(rowCountPerPage > 0) {
             commonVO.setRowCountPerPage(rowCountPerPage);
@@ -48,7 +48,7 @@ public class PagingUtil {
      * 페이징 설정
      * @param commonVO
      */
-    public static void setPaging(CommonVO commonVO) {
+    public static void setPaging(Common commonVO) {
         PagingUtil.setPaging(commonVO, 0);
     }
 }

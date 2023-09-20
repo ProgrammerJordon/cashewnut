@@ -1,13 +1,14 @@
 package cashewnut.member.service;
 
-import cashewnut.member.domain.Address;
-import cashewnut.member.domain.Member;
-import cashewnut.member.domain.Order;
-import cashewnut.member.domain.OrderStatus;
-import cashewnut.member.domain.item.Book;
-import cashewnut.member.domain.item.Item;
+import cashewnut.economy.user.member.domain.Address;
+import cashewnut.economy.user.member.domain.Member;
+import cashewnut.economy.user.member.domain.Order;
+import cashewnut.economy.user.member.domain.OrderStatus;
+import cashewnut.economy.user.member.domain.item.Book;
+import cashewnut.economy.user.member.domain.item.Item;
 import cashewnut.common.exception.NotEnoughStockException;
-import cashewnut.member.repository.OrderRepository;
+import cashewnut.economy.user.member.repository.OrderRepository;
+import cashewnut.economy.user.member.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
