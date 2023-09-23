@@ -1,7 +1,5 @@
-package cashewnut.membership.entity;
+package cashewnut.economy.user.membership.entity;
 
-import cashewnut.economy.user.membership.entity.Membership;
-import cashewnut.economy.user.membership.entity.Team;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

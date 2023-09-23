@@ -1,5 +1,7 @@
 package cashewnut.economy.user.membership.entity;
 
+import cashewnut.economy.user.guest.entity.Guest;
+import cashewnut.economy.user.member.domain.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +20,12 @@ public class Team {
     private String name;
     @OneToMany(mappedBy = "team")
     private List<Membership> MemberShips = new ArrayList<>();
+
+    @OneToMany(mappedBy = "team")
+    private List<Member> Members = new ArrayList<>();
+
+    @OneToMany(mappedBy = "team")
+    private List<Guest> Guests = new ArrayList<>();
 
     public Team(String name) {
         this.name = name;

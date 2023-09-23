@@ -1,8 +1,7 @@
-package cashewnut.member.service;
+package cashewnut.economy.user.member.service;
 
 import cashewnut.economy.user.member.domain.Member;
 import cashewnut.economy.user.member.repository.MemberRepository;
-import cashewnut.economy.user.member.service.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

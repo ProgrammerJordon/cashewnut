@@ -1,9 +1,9 @@
 package cashewnut.economy.user.member.repository;
 
-import cashewnut.economy.user.member.domain.Order;
-import cashewnut.economy.user.member.domain.OrderStatus;
 import cashewnut.economy.user.member.domain.QMember;
 import cashewnut.economy.user.member.domain.QOrder;
+import cashewnut.economy.user.member.domain.Order;
+import cashewnut.economy.user.member.domain.OrderStatus;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class OrderRepository {
-
     private final EntityManager em;
 
     public void save(Order order) {

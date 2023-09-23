@@ -20,7 +20,11 @@ public class QTeam extends EntityPathBase<Team> {
 
     public static final QTeam team = new QTeam("team");
 
+    public final ListPath<cashewnut.economy.user.guest.entity.Guest, cashewnut.economy.user.guest.entity.QGuest> Guests = this.<cashewnut.economy.user.guest.entity.Guest, cashewnut.economy.user.guest.entity.QGuest>createList("Guests", cashewnut.economy.user.guest.entity.Guest.class, cashewnut.economy.user.guest.entity.QGuest.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final ListPath<cashewnut.economy.user.member.domain.Member, cashewnut.economy.user.member.domain.QMember> Members = this.<cashewnut.economy.user.member.domain.Member, cashewnut.economy.user.member.domain.QMember>createList("Members", cashewnut.economy.user.member.domain.Member.class, cashewnut.economy.user.member.domain.QMember.class, PathInits.DIRECT2);
 
     public final ListPath<Membership, QMembership> MemberShips = this.<Membership, QMembership>createList("MemberShips", Membership.class, QMembership.class, PathInits.DIRECT2);
 

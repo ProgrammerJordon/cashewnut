@@ -1,11 +1,8 @@
-package cashewnut.membership.repository;
+package cashewnut.economy.user.membership.repository;
 
 import cashewnut.economy.user.membership.dto.MembershipDto;
 import cashewnut.economy.user.membership.entity.Membership;
 import cashewnut.economy.user.membership.entity.Team;
-import cashewnut.economy.user.membership.repository.MembershipJpaRepository;
-import cashewnut.economy.user.membership.repository.MembershipRepository;
-import cashewnut.economy.user.membership.repository.TeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
