@@ -18,11 +18,29 @@ public class QTeam extends EntityPathBase<Team> {
 
     private static final long serialVersionUID = 71474365L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QTeam team = new QTeam("team");
+
+    public final cashewnut.economy.common.QTrack _super = new cashewnut.economy.common.QTrack(this);
+
+    //inherited
+    public final StringPath createdBy = _super.createdBy;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 
     public final ListPath<cashewnut.economy.user.guest.entity.Guest, cashewnut.economy.user.guest.entity.QGuest> Guests = this.<cashewnut.economy.user.guest.entity.Guest, cashewnut.economy.user.guest.entity.QGuest>createList("Guests", cashewnut.economy.user.guest.entity.Guest.class, cashewnut.economy.user.guest.entity.QGuest.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    //inherited
+    public final StringPath lastModifiedBy = _super.lastModifiedBy;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
+
+    public final cashewnut.economy.user.master.entity.QMaster master;
 
     public final ListPath<cashewnut.economy.user.member.domain.Member, cashewnut.economy.user.member.domain.QMember> Members = this.<cashewnut.economy.user.member.domain.Member, cashewnut.economy.user.member.domain.QMember>createList("Members", cashewnut.economy.user.member.domain.Member.class, cashewnut.economy.user.member.domain.QMember.class, PathInits.DIRECT2);
 
@@ -31,15 +49,24 @@ public class QTeam extends EntityPathBase<Team> {
     public final StringPath name = createString("name");
 
     public QTeam(String variable) {
-        super(Team.class, forVariable(variable));
+        this(Team.class, forVariable(variable), INITS);
     }
 
     public QTeam(Path<? extends Team> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QTeam(PathMetadata metadata) {
-        super(Team.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QTeam(PathMetadata metadata, PathInits inits) {
+        this(Team.class, metadata, inits);
+    }
+
+    public QTeam(Class<? extends Team> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.master = inits.isInitialized("master") ? new cashewnut.economy.user.master.entity.QMaster(forProperty("master")) : null;
     }
 
 }

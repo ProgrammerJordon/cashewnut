@@ -1,6 +1,8 @@
 package cashewnut.economy.user.membership.entity;
 
+import cashewnut.economy.common.Track;
 import cashewnut.economy.user.guest.entity.Guest;
+import cashewnut.economy.user.master.entity.Master;
 import cashewnut.economy.user.member.domain.Member;
 import lombok.*;
 
@@ -12,7 +14,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "name"})
-public class Team {
+public class Team extends Track {
 
     @Id @GeneratedValue
     @Column(name = "team_id")
@@ -26,6 +28,10 @@ public class Team {
 
     @OneToMany(mappedBy = "team")
     private List<Guest> Guests = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "master_id")
+    private Master master;
 
     public Team(String name) {
         this.name = name;

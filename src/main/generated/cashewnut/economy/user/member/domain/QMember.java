@@ -51,7 +51,7 @@ public class QMember extends EntityPathBase<Member> {
     public QMember(Class<? extends Member> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.address = inits.isInitialized("address") ? new QAddress(forProperty("address")) : null;
-        this.team = inits.isInitialized("team") ? new cashewnut.economy.user.membership.entity.QTeam(forProperty("team")) : null;
+        this.team = inits.isInitialized("team") ? new cashewnut.economy.user.membership.entity.QTeam(forProperty("team"), inits.get("team")) : null;
     }
 
 }

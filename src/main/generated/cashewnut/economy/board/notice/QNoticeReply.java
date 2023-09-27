@@ -1,4 +1,4 @@
-package cashewnut.economy.user.membership.entity;
+package cashewnut.economy.board.notice;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,20 +11,18 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QMembership is a Querydsl query type for Membership
+ * QNoticeReply is a Querydsl query type for NoticeReply
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QMembership extends EntityPathBase<Membership> {
+public class QNoticeReply extends EntityPathBase<NoticeReply> {
 
-    private static final long serialVersionUID = 1112840758L;
+    private static final long serialVersionUID = 1123601754L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QMembership membership = new QMembership("membership");
+    public static final QNoticeReply noticeReply = new QNoticeReply("noticeReply");
 
     public final cashewnut.economy.common.QTrack _super = new cashewnut.economy.common.QTrack(this);
-
-    public final NumberPath<Integer> age = createNumber("age", Integer.class);
 
     //inherited
     public final StringPath createdBy = _super.createdBy;
@@ -40,29 +38,31 @@ public class QMembership extends EntityPathBase<Membership> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final QTeam team;
+    public final QNotice notice;
 
-    public final StringPath userName = createString("userName");
+    public final StringPath replyContents = createString("replyContents");
 
-    public QMembership(String variable) {
-        this(Membership.class, forVariable(variable), INITS);
+    public final NumberPath<Integer> viewCount = createNumber("viewCount", Integer.class);
+
+    public QNoticeReply(String variable) {
+        this(NoticeReply.class, forVariable(variable), INITS);
     }
 
-    public QMembership(Path<? extends Membership> path) {
+    public QNoticeReply(Path<? extends NoticeReply> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QMembership(PathMetadata metadata) {
+    public QNoticeReply(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QMembership(PathMetadata metadata, PathInits inits) {
-        this(Membership.class, metadata, inits);
+    public QNoticeReply(PathMetadata metadata, PathInits inits) {
+        this(NoticeReply.class, metadata, inits);
     }
 
-    public QMembership(Class<? extends Membership> type, PathMetadata metadata, PathInits inits) {
+    public QNoticeReply(Class<? extends NoticeReply> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.team = inits.isInitialized("team") ? new QTeam(forProperty("team"), inits.get("team")) : null;
+        this.notice = inits.isInitialized("notice") ? new QNotice(forProperty("notice"), inits.get("notice")) : null;
     }
 
 }

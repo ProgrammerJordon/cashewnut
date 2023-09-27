@@ -62,7 +62,7 @@ public class QGuest extends EntityPathBase<Guest> {
 
     public QGuest(Class<? extends Guest> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.team = inits.isInitialized("team") ? new cashewnut.economy.user.membership.entity.QTeam(forProperty("team")) : null;
+        this.team = inits.isInitialized("team") ? new cashewnut.economy.user.membership.entity.QTeam(forProperty("team"), inits.get("team")) : null;
     }
 
 }

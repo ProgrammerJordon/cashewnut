@@ -1,4 +1,4 @@
-package cashewnut.economy.user.membership.entity;
+package cashewnut.economy.board.faq;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,26 +11,28 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QMembership is a Querydsl query type for Membership
+ * QFaq is a Querydsl query type for Faq
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QMembership extends EntityPathBase<Membership> {
+public class QFaq extends EntityPathBase<Faq> {
 
-    private static final long serialVersionUID = 1112840758L;
+    private static final long serialVersionUID = 1733818944L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QMembership membership = new QMembership("membership");
+    public static final QFaq faq = new QFaq("faq");
 
     public final cashewnut.economy.common.QTrack _super = new cashewnut.economy.common.QTrack(this);
 
-    public final NumberPath<Integer> age = createNumber("age", Integer.class);
+    public final StringPath contents = createString("contents");
 
     //inherited
     public final StringPath createdBy = _super.createdBy;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
+
+    public final ListPath<FaqReply, QFaqReply> faqReplyList = this.<FaqReply, QFaqReply>createList("faqReplyList", FaqReply.class, QFaqReply.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -40,29 +42,31 @@ public class QMembership extends EntityPathBase<Membership> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final QTeam team;
+    public final cashewnut.economy.user.master.entity.QMaster master;
 
-    public final StringPath userName = createString("userName");
+    public final StringPath title = createString("title");
 
-    public QMembership(String variable) {
-        this(Membership.class, forVariable(variable), INITS);
+    public final NumberPath<Integer> viewCount = createNumber("viewCount", Integer.class);
+
+    public QFaq(String variable) {
+        this(Faq.class, forVariable(variable), INITS);
     }
 
-    public QMembership(Path<? extends Membership> path) {
+    public QFaq(Path<? extends Faq> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QMembership(PathMetadata metadata) {
+    public QFaq(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QMembership(PathMetadata metadata, PathInits inits) {
-        this(Membership.class, metadata, inits);
+    public QFaq(PathMetadata metadata, PathInits inits) {
+        this(Faq.class, metadata, inits);
     }
 
-    public QMembership(Class<? extends Membership> type, PathMetadata metadata, PathInits inits) {
+    public QFaq(Class<? extends Faq> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.team = inits.isInitialized("team") ? new QTeam(forProperty("team"), inits.get("team")) : null;
+        this.master = inits.isInitialized("master") ? new cashewnut.economy.user.master.entity.QMaster(forProperty("master")) : null;
     }
 
 }
