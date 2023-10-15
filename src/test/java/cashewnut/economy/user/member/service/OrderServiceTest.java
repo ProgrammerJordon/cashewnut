@@ -8,7 +8,6 @@ import cashewnut.economy.user.member.domain.item.Book;
 import cashewnut.economy.user.member.domain.item.Item;
 import cashewnut.common.exception.NotEnoughStockException;
 import cashewnut.economy.user.member.repository.OrderRepository;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

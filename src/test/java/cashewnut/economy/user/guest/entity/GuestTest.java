@@ -370,7 +370,7 @@ public class GuestTest {
         // when
         Guest findGuset = queryFactory
                 .selectFrom(guest)
-                .where(guest.userName.eq("guset1"))
+                .where(guest.userName.eq("guest1"))
                 .fetchOne();
         // then
         boolean loaded = emf.getPersistenceUnitUtil().isLoaded(findGuset.getTeam());
