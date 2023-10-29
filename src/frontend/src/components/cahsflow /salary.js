@@ -20,7 +20,7 @@ function Salary() {
                     <div className="cashflow-contents">
                         <div className="cashflow-content">
                             <div>
-                                연봉계산기
+                                연봉계산기1111111
                             </div>
                         </div>
                     </div>
