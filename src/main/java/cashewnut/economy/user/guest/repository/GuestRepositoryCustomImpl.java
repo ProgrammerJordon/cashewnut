@@ -43,7 +43,6 @@ public class GuestRepositoryCustomImpl implements GuestRepositoryCustom {
                         teamNameEq(condition.getTeamName()),
                         ageGoe(condition.getAgeGoe()),
                         ageLoe(condition.getAgeLoe())
-
                 )
                 .fetch();
     }

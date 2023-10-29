@@ -82,7 +82,7 @@ tasks.named('test') {
 }
 
 //querydsl 추가 시작
-def querydslDir = "$buildDir/generated/querydsl"
+def querydslDir = "$projectDir/src/main/generated/querydsl"
 
 querydsl {
     jpa = true
@@ -103,7 +103,7 @@ configurations {
 
 //Querydsl 추가, 자동 생성된 Q클래스 gradle clean으로 제거
 clean {
-    delete file('src/main/generated')
+    delete file('/src/main/generated')
 }
 
 // React base path = "/src/main/frontend"
