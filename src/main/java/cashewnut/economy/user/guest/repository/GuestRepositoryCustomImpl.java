@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 import static cashewnut.economy.user.guest.entity.QGuest.guest;
