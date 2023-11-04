@@ -1,0 +1,102 @@
+/*-----header-------------------------------------------------------------------------------------------*/
+html {
+    margin : 0px;
+    background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));
+}
+
+h1 {
+    text-decoration: none;
+    color: white;
+}
+
+h2 {
+    text-decoration: none;
+    color: white;
+}
+
+h3 {
+    text-decoration: none;
+    color: white;
+}
+
+h4 {
+    text-decoration: none;
+    color: white;
+}
+
+h5 {
+    text-decoration: none;
+    color: white;
+}
+
+a {
+    text-underline: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-direction-around {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-direction-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-direction-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.item-center {
+    align-items: center;
+}
+
+/*
+Navigator Bar
+*/
+
+
+/*
+Footer Bar
+*/

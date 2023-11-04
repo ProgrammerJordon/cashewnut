@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
-
 public class DateUtil {
 
     public static  boolean isEmpty(String str) {
