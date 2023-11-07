@@ -21,19 +21,19 @@ public class Common {
     /**
      * 등록 유저 번호
      */
-    private String registUser;
+    private String createdBy;
     /**
      * 최종수정 유저 번호
      */
-    private String lastUpdateUser;
+    private String lastModifiedBy;
     /**
      * 등록일시
      */
-    private String registYmd;
+    private String createdDate;
     /**
      * 최종수정일시
      */
-    private String lastUpdateYmd;
+    private String lastModifiedDate;
     /**
      * 현재 페이지
      */

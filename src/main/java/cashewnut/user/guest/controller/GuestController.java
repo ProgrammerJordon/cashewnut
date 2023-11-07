@@ -6,7 +6,6 @@ import cashewnut.user.guest.repository.GuestJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -21,9 +20,5 @@ public class GuestController {
     @ResponseBody
     public List<GuestTeamDto> searchGuestV1(GuestSearchCondition condition) {
         return guestJpaRepository.searchByBuilder2(condition);
-    }
-    @RequestMapping("/test")
-    public String test() {
-        return "main/VIEW001001M";
     }
 }

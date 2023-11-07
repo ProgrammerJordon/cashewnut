@@ -16,16 +16,14 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 public class Track {
-
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdDate;
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
-
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
     @LastModifiedBy
     private String lastModifiedBy;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 }

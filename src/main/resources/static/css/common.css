@@ -1,36 +1,216 @@
 /*-----header-------------------------------------------------------------------------------------------*/
 html {
+    width: 100%;
+    height: 100vh;
     margin : 0px;
     background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));
 }
 
-h1 {
-    text-decoration: none;
-    color: white;
+img {
+    width: 100px;
+    height: 50px;
 }
 
-h2 {
-    text-decoration: none;
-    color: white;
+.background-skyblue {
+    background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));
 }
 
-h3 {
-    text-decoration: none;
-    color: white;
+.background-blue {
+    background: linear-gradient(to right, rgba(32, 88, 182, 0.2), rgba(12, 32, 65, 0), rgba(235, 235, 235, 1));
 }
 
-h4 {
-    text-decoration: none;
-    color: white;
+.background-pink {
+    background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 }
 
-h5 {
+.anchor {
+    color: black;
     text-decoration: none;
-    color: white;
 }
 
-a {
-    text-underline: none;
+.anchor-hover {
+    color: black;
+    text-decoration: none;
+    position: relative;
+}
+.anchor-hover::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 100%;
+    height: 3px;
+    background-color: rgba(254, 214, 227, 0.3);
+    transition: right 0.1s ease;
+}
+.anchor-hover:hover::before {
+    right: 0;
+}
+
+.width10 {
+    width: 10%;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.width30 {
+    width: 30%;
+}
+
+.width40 {
+    width: 40%;
+}
+
+.width50 {
+    width: 50%;
+}
+
+.width60 {
+    width: 60%;
+}
+
+.width70 {
+    width: 70%;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.width90 {
+    width: 90%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.height10 {
+    height: 10%;
+}
+
+.height20 {
+    height: 20%;
+}
+
+.height30 {
+    height: 30%;
+}
+
+.height40 {
+    height: 40%;
+}
+
+.height50 {
+    height: 50%;
+}
+
+.height60 {
+    height: 60%;
+}
+
+.height70 {
+    height: 70%;
+}
+
+.height80 {
+    height: 80%;
+}
+
+.height90 {
+    height: 90%;
+}
+
+.height100 {
+    height: 100%;
+}
+
+.margin5 {
+    margin: 5px 0px;
+}
+
+.margin10 {
+    margin: 10px 0px;
+}
+
+.margin15 {
+    margin: 15px 0px;
+}
+
+.margin20 {
+    margin: 20px 0px;
+}
+
+.margin25 {
+    margin: 25px 0px;
+}
+
+.margin30 {
+    margin: 30px 0px;
+}
+
+.margin35 {
+    margin: 35px 0px;
+}
+
+.margin40 {
+    margin: 40px 0px;
+}
+
+.margin45 {
+    margin: 45px 0px;
+}
+
+.margin50 {
+    margin: 50px 0px;
+}
+
+.h1 {
+    text-decoration: none;
+    color: white;
+    font-size: 2.5em;
+}
+
+.h2 {
+    text-decoration: none;
+    color: white;
+    font-size: 2em;
+}
+
+.h3 {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5em;
+}
+
+.h4 {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+}
+
+.h5 {
+    text-decoration: none;
+    color: white;
+    font-size: 0.5em;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.button-small {
+    width: 150px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0px;
+    font-weight: bold;
+    font-size: 20px;
+    background: linear-gradient(to right, rgba(32, 88, 182, 0.2), rgba(12, 32, 65, 0), rgba(235, 235, 235, 1));
 }
 
 .flex {
@@ -88,7 +268,7 @@ a {
     text-align: center;
 }
 
-.item-center {
+.align-center {
     align-items: center;
 }
 

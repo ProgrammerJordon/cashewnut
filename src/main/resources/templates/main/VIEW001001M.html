@@ -3,7 +3,296 @@
 <head th:replace="/prefix/head :: headfragment"></head>
 <body>
 <div th:replace="/prefix/header :: headerfragment"></div>
-테스트입니다.
+
+<div id="dometisStockPrice_Table"></div>
+<div id="transactionAmount_Table"></div>
+<div id="commoditySearch_Table"></div>
+<div id="closedDays_Table"></div>
+<div id="investorTrendEstimate_Table"></div>
+<div id="programTradeEstimate_Table"></div>
+
+
 <div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
+<script>
+    let dometisStockPrice_Table;
+    let transactionAmount_Table;
+    let commoditySearch_Table;
+    let closedDays_Table;
+    let investorTrendEstimate_Table;
+    let programTradeEstimate_Table;
+
+    function init() {
+        dometisStockPrice_Table = new Tabulator("#dometisStockPrice_Table", {
+            width: "400px",
+            height: "200px",
+            layout:"fitDataTable",
+            resizableColumnFit: true,
+            columns: [
+                { title: "시장구분", field: "rprs_mrkt_kor_name", resizable: true },
+                { title: "종목코드", field: "stck_shrn_iscd", resizable: true },
+                { title: "업종", field: "bstp_kor_isnm", resizable: true },
+                { title: "거래량", field: "acml_vol", resizable: true },
+                { title: "현재가", field: "stck_prpr", resizable: true },
+                { title: "전일대비", field: "prdy_ctrt", resizable: true },
+            ],
+        });
+
+        transactionAmount_Table = new Tabulator("#transactionAmount_Table", {
+            width: "400px",
+            height: "300px",
+            layout:"fitDataTable",
+            resizableColumnFit: true,
+            columns: [
+                { title: "순위", field: "data_rank", resizable: true },
+                { title: "종목명", field: "hts_kor_isnm", resizable: true },
+                { title: "현재가", field: "stck_prpr", resizable: true },
+                { title: "전일대비", field: "prdy_vrss", resizable: true },
+                { title: "전일대비율", field: "prdy_ctrt", resizable: true },
+                { title: "등급", field: "prdy_vrss_sign", resizable: true },
+                { title: "거래량", field: "acml_vol", resizable: true },
+                { title: "거래증가율", field: "vol_inrt", resizable: true },
+                { title: "거래량 회전율", field: "vol_tnrt", resizable: true },
+                { title: "거래대금", field: "acml_tr_pbmn", resizable: true },
+                { title: "거래대금 회전율", field: "tr_pbmn_tnrt", resizable: true }
+            ],
+        });
+
+        commoditySearch_Table = new Tabulator("#commoditySearch_Table", {
+            width: "400px",
+            height: "100px",
+            layout:"fitColumns",
+            resizableColumnFit: true,
+            columns: [
+                { title: "상품번호", field: "pdno", resizable: true },
+                { title: "상품유형코드", field: "prdt_type_cd", resizable: true },
+                { title: "상품명", field: "prdt_name", resizable: true },
+                { title: "상품영문명", field: "prdt_eng_name", resizable: true },
+                { title: "상품위험등급코드", field: "prdt_risk_grad_cd", resizable: true },
+                { title: "상품판매상태코드", field: "prdt_sale_stat_cd", resizable: true },
+                { title: "상품분류코드", field: "prdt_clsf_cd", resizable: true },
+                { title: "상품분류명", field: "prdt_clsf_name", resizable: true },
+                { title: "랩어카운트 자산유형코드", field: "wrap_asst_type_cd", resizable: true },
+                { title: "투자상품유형코드", field: "ivst_prdt_type_cd", resizable: true },
+                { title: "투자상품유형코드명", field: "ivst_prdt_type_cd_name", resizable: true },
+                { title: "최초등록일자", field: "frst_erlm_dt", resizable: true },
+                { title: "판매시작일자", field: "sale_strt_dt", resizable: true },
+                { title: "판매종료일자", field: "sale_end_dt", resizable: true }
+            ],
+        });
+
+        closedDays_Table = new Tabulator("#closedDays_Table", {
+            width: "400px",
+            height: "200px",
+            layout:"fitDataTable",
+            resizableColumnFit: true,
+            columns: [
+                { title: "날짜", field: "bass_dt", resizable: true },
+                { title: "요일구분코드", field: "wday_dvsn_cd", resizable: true },
+                { title: "영업일여부", field: "bzdy_yn", resizable: true },
+                { title: "거래일여부", field: "tr_day_yn", resizable: true },
+                { title: "개장일여부", field: "opnd_yn", resizable: true }
+            ],
+        });
+
+        investorTrendEstimate_Table = new Tabulator("#investorTrendEstimate_Table", {
+            width: "400px",
+            height: "200px",
+            layout:"fitDataTable",
+            resizableColumnFit: true,
+            columns: [
+                { title: "시간", field: "bsop_hour_gb", resizable: true },
+                { title: "외국인수량(가집계)", field: "frgn_fake_ntby_qty", formatter:"money", resizable: true },
+                { title: "기관수량(가집계)", field: "orgn_fake_ntby_qty", formatter:"money", resizable: true },
+                { title: "합산수량(가집계)", field: "sum_fake_ntby_qty", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"", symbolAfter:"", negativeSign:false, precision:true}, resizable: true }
+            ],
+        });
+
+        programTradeEstimate_Table = new Tabulator("#programTradeEstimate_Table", {
+            width: "400px",
+            height: "300px",
+            layout:"fitColumns",
+            resizableColumnFit: true,
+            columns: [
+                { title: "시간(HH:mm:ss)", field: "bsop_hour", resizable: true },
+                { title: "주식현재가", field: "stck_prpr", formatter: "money", resizable: true },
+                { title: "전일 대비", field: "prdy_vrss", formatter: "money", resizable: true },
+                { title: "추세", field: "prdy_vrss_sign", formatter: "star", resizable: true },
+                { title: "전일 대비율", field: "prdy_ctrt", resizable: true },
+                { title: "누적거래량", field: "acml_vol", formatter: "money", resizable: true },
+                { title: "전체 합계 순매수 수량", field: "whol_smtn_ntby_qty", formatter: "money", resizable: true },
+                { title: "전체 합계 매수 거래량", field: "whol_smtn_shnu_vol", formatter: "money", resizable: true },
+                { title: "전체 합계 매도 거래량", field: "whol_smtn_seln_vol", formatter: "money", resizable: true },
+                { title: "전체 순매수 거래량 증감", field: "whol_ntby_vol_icdc", formatter: "money", resizable: true },
+                { title: "전체 합계 순매수 거래 대금", field: "whol_smtn_ntby_tr_pbmn", formatter: "money", resizable: true },
+                { title: "전체 합계 매수 거래 대금", field: "whol_smtn_shnu_tr_pbmn", formatter: "money", resizable: true },
+                { title: "전체 합계 매도 거래 대금", field: "whol_smtn_seln_tr_pbmn", formatter: "money", resizable: true },
+                { title: "전체 순매수 거래 대금 증감", field: "whol_ntby_tr_pbmn_icdc", formatter: "money", resizable: true }
+            ],
+        });
+    }
+
+    function dometisStockPriceInq() {
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+            // 컬럼에 맞게 데이터 추출
+            let rowData = {
+                rprs_mrkt_kor_name: JSONData.output.rprs_mrkt_kor_name,
+                stck_shrn_iscd: JSONData.output.stck_shrn_iscd,
+                bstp_kor_isnm: JSONData.output.bstp_kor_isnm,
+                acml_vol: JSONData.output.acml_vol,
+                stck_prpr: JSONData.output.stck_prpr,
+                prdy_ctrt: JSONData.output.prdy_ctrt
+            };
+            dometisStockPrice_Table.setData([rowData]);
+        };
+        RequestUrl('/api/domestic_stock_price', 'GET', '', callback);
+    }
+    function transactionAmountInq() {
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+
+            let resultArray = [];
+
+            for (let i = 0; i < JSONData.output.length; i++) {
+                let rowJSONData = JSONData.output[i];
+
+                let rowData = {
+                    data_rank: rowJSONData.data_rank,
+                    hts_kor_isnm: rowJSONData.hts_kor_isnm,
+                    stck_prpr: rowJSONData.stck_prpr,
+                    prdy_vrss: rowJSONData.prdy_vrss,
+                    prdy_ctrt: rowJSONData.prdy_ctrt,
+                    prdy_vrss_sign: rowJSONData.prdy_vrss_sign,
+                    acml_vol: rowJSONData.acml_vol,
+                    vol_inrt: rowJSONData.vol_inrt,
+                    vol_tnrt: rowJSONData.vol_tnrt,
+                    acml_tr_pbmn: rowJSONData.acml_tr_pbmn,
+                    tr_pbmn_tnrt: rowJSONData.tr_pbmn_tnrt
+                };
+                resultArray.push(rowData);
+            }
+            transactionAmount_Table.setData(resultArray);
+        };
+        RequestUrl('/api/transaction_amount', 'GET', '', callback);
+    }
+
+    function commoditySearchInq() {
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+            // 컬럼에 맞게 데이터 추출
+            let rowData = {
+                pdno: JSONData.output.pdno,
+                prdt_type_cd: JSONData.output.prdt_type_cd,
+                prdt_name: JSONData.output.prdt_name,
+                prdt_eng_name: JSONData.output.prdt_eng_name,
+                prdt_risk_grad_cd: JSONData.output.prdt_risk_grad_cd,
+                prdt_sale_stat_cd: JSONData.output.prdt_sale_stat_cd,
+                prdt_clsf_cd: JSONData.output.prdt_clsf_cd,
+                prdt_clsf_name: JSONData.output.prdt_clsf_name,
+                wrap_asst_type_cd: JSONData.output.wrap_asst_type_cd,
+                ivst_prdt_type_cd: JSONData.output.ivst_prdt_type_cd,
+                ivst_prdt_type_cd_name: JSONData.output.ivst_prdt_type_cd_name,
+                frst_erlm_dt: JSONData.output.frst_erlm_dt,
+                sale_strt_dt: JSONData.output.sale_strt_dt,
+                sale_end_dt: JSONData.output.sale_end_dt
+            };
+            commoditySearch_Table.setData([rowData]);
+        };
+        RequestUrl('/api/commodity_search', 'GET', '', callback);
+    }
+
+    function closedDaysInq() {
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+
+            let resultArray = [];
+
+            for (let i = 0; i < JSONData.output.length; i++) {
+                let rowJSONData = JSONData.output[i];
+                if (rowJSONData.wday_dvsn_cd == "01" || rowJSONData.wday_dvsn_cd == "07" || rowJSONData.opnd_yn == "N") {
+                    let rowData = {
+                        bass_dt: rowJSONData.bass_dt,
+                        wday_dvsn_cd: rowJSONData.wday_dvsn_cd,
+                        bzdy_yn: rowJSONData.bzdy_yn,
+                        tr_day_yn: rowJSONData.tr_day_yn,
+                        opnd_yn: rowJSONData.opnd_yn
+                    };
+                    resultArray.push(rowData);
+                }
+            }
+            closedDays_Table.setData(resultArray);
+        };
+        RequestUrl('/api/closed_days', 'GET', '', callback);
+    }
+
+    function investorTrendEstimateInq() {
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+
+            let resultArray = [];
+
+            for (let i = 0; i < JSONData.output2.length; i++) {
+                let rowJSONData = JSONData.output2[i];
+
+                    let rowData = {
+                        bsop_hour_gb: rowJSONData.bsop_hour_gb,
+                        frgn_fake_ntby_qty: rowJSONData.frgn_fake_ntby_qty,
+                        orgn_fake_ntby_qty: rowJSONData.orgn_fake_ntby_qty,
+                        sum_fake_ntby_qty: rowJSONData.sum_fake_ntby_qty,
+                    };
+                    resultArray.push(rowData);
+                }
+            investorTrendEstimate_Table.setData(resultArray);
+        };
+        RequestUrl('/api/investor_trend_estimate', 'GET', '', callback);
+    }
+
+    function programTradeEstimateInq() {
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+
+            let resultArray = [];
+
+            for (let i = 0; i < JSONData.output.length; i++) {
+                let rowJSONData = JSONData.output[i];
+
+                let rowData = {
+                    bsop_hour: rowJSONData.bsop_hour,
+                    stck_prpr: rowJSONData.stck_prpr,
+                    prdy_vrss: rowJSONData.prdy_vrss,
+                    prdy_vrss_sign: rowJSONData.prdy_vrss_sign,
+                    prdy_ctrt: rowJSONData.prdy_ctrt,
+                    acml_vol: rowJSONData.acml_vol,
+                    whol_smtn_shnu_vol: rowJSONData.whol_smtn_shnu_vol,
+                    whol_smtn_seln_vol: rowJSONData.whol_smtn_seln_vol,
+                    whol_ntby_vol_icdc: rowJSONData.whol_ntby_vol_icdc,
+                    whol_smtn_ntby_tr_pbmn: rowJSONData.whol_smtn_ntby_tr_pbmn,
+                    whol_smtn_shnu_tr_pbmn: rowJSONData.whol_smtn_shnu_tr_pbmn,
+                    whol_smtn_seln_tr_pbmn: rowJSONData.whol_smtn_seln_tr_pbmn,
+                    whol_ntby_tr_pbmn_icdc: rowJSONData.whol_ntby_tr_pbmn_icdc
+                };
+                resultArray.push(rowData);
+            }
+            programTradeEstimate_Table.setData(resultArray);
+        };
+        RequestUrl('/api/program_trade_estimate', 'GET', '', callback);
+    }
+
+    $(function() {
+        init();
+        dometisStockPriceInq();
+        transactionAmountInq();
+        commoditySearchInq();
+        closedDaysInq();
+        investorTrendEstimateInq();
+        programTradeEstimateInq();
+    });
+</script>
