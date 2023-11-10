@@ -1,6 +1,6 @@
 /*-----header-------------------------------------------------------------------------------------------*/
 html {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     margin : 0px;
     background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));
@@ -127,6 +127,86 @@ img {
     height: 100%;
 }
 
+.margin-rigth5 {
+    margin-right: 5px;
+}
+
+.margin-rigth10 {
+    margin-right: 10px;
+}
+
+.margin-rigth15 {
+    margin-right: 15px;
+}
+
+.margin-rigth20 {
+    margin-right: 20px;
+}
+
+.margin-rigth25 {
+    margin-right: 25px;
+}
+
+.margin-rigth30 {
+    margin-right: 30px;
+}
+
+.margin-rigth35 {
+    margin-right: 35px;
+}
+
+.margin-rigth40 {
+    margin-right: 40px;
+}
+
+.margin-rigth45 {
+    margin-right: 45px;
+}
+
+.margin-rigth50 {
+    margin-right: 50px;
+}
+
+.margin5x5 {
+    margin: 5px 5px;
+}
+
+.margin10x10 {
+    margin: 10px 10px;
+}
+
+.margin15x15 {
+    margin: 15px 15px;
+}
+
+.margin20x20 {
+    margin: 20px 20px;
+}
+
+.margin25x25 {
+    margin: 25px 25px;
+}
+
+.margin30x30 {
+    margin: 30px 30px;
+}
+
+.margin35x35 {
+    margin: 35px 35px;
+}
+
+.margin40x40 {
+    margin: 40px 40px;
+}
+
+.margin4x45 {
+    margin: 45px 45px;
+}
+
+.margin50x50 {
+    margin: 50px 50px;
+}
+
 .margin5 {
     margin: 5px 0px;
 }
@@ -229,10 +309,21 @@ img {
     align-items: center;
 }
 
+.flex-direction {
+    display: flex;
+    flex-direction: column;
+}
+
 .flex-between {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.flex-direction-around-basic {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .flex-direction-around {

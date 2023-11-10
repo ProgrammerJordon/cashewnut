@@ -1,10 +1,11 @@
 <header th:fragment="headerfragment">
     <div class="flex-between title text-center margin30">
         <div class="flex-around width20">
-            <div><a th:href="@{/main}"><img th:src="@{/image/default.png}"></a></div>
+            <div><a th:href="@{/home}"><img th:src="@{/image/default.png}"></a></div>
             <div>CASHEWNUT</div>
         </div>
         <div class="flex-around width60">
+            <div><a class="anchor-hover" th:href="@{/domestic}">국내주식</a></div>
             <div><a class="anchor-hover" th:href="@{/index}">인덱스</a></div>
             <div><a class="anchor-hover" th:href="@{/dividend}">배당</a></div>
             <div><a class="anchor-hover" th:href="@{/etf}">ETF</a></div>

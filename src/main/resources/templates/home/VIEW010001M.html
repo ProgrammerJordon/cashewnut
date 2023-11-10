@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/prefix/head :: headfragment"></head>
+<body>
+<div th:replace="/prefix/header :: headerfragment"></div>
+<div>
+  <div th:class="h3">휴장일</div>
+  <div id="closedDays_Table"></div>
+</div>
+<div th:replace="/prefix/footer :: footerfragment"></div>
+</body>
+</html>
+<script>
+  let closedDays_Table;
+  function init() {
+    closedDays_Table = new Tabulator("#closedDays_Table", {
+      width: "400px",
+      height: "300px",
+      layout: "fitDataTable",
+      resizableColumnFit: true,
+      columns: [
+        {title: "날짜", field: "bass_dt", resizable: true},
+        {title: "요일구분코드", field: "wday_dvsn_cd", resizable: true},
+        //{ title: "영업일여부", field: "bzdy_yn", resizable: true },
+        //{ title: "거래일여부", field: "tr_day_yn", resizable: true },
+        {title: "개장일여부", field: "opnd_yn", resizable: true}
+      ],
+    });
+
+  }
+
+
+
+  function closedDaysInq() {
+    let callback = (result) => {
+      let data = result.response;
+      let JSONData = JSON.parse(data);
+
+      let resultArray = [];
+
+      for (let i = 0; i < JSONData.output.length; i++) {
+        let rowJSONData = JSONData.output[i];
+        let rowData = {
+          bass_dt: rowJSONData.bass_dt,
+          wday_dvsn_cd: rowJSONData.wday_dvsn_cd,
+          bzdy_yn: rowJSONData.bzdy_yn,
+          tr_day_yn: rowJSONData.tr_day_yn,
+          opnd_yn: rowJSONData.opnd_yn
+        };
+        resultArray.push(rowData);
+      }
+      closedDays_Table.setData(resultArray);
+    };
+    RequestUrl('/api/closed_days', 'GET', '', callback);
+  }
+
+
+  $(function() {
+    init();
+    closedDaysInq();
+  });
+</script>

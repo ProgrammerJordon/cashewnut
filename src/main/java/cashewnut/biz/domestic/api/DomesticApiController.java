@@ -1,6 +1,7 @@
-package cashewnut.biz.main.api;
+package cashewnut.biz.domestic.api;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,26 +9,24 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class MainApiController {
+public class DomesticApiController {
 
     /**
      * 기본 접근 권한 및 토큰
      */
-    Date date = new Date();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-    String currentDate = dateFormat.format(date);
-    String contentType = "application/json";
-    String authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b2tlbiIsImF1ZCI6IjIxNjdhM2NkLTI5MmYtNGIxZC1hMTkyLTkxNjQ5N2EzZWVmOSIsImlzcyI6InVub2d3IiwiZXhwIjoxNjk5NDIyODg0LCJpYXQiOjE2OTkzMzY0ODQsImp0aSI6IlBTUVdaZzFOV3RjeFRUQ05ZSWdKN0xZb2FjSngzOFZ2Q1htUSJ9.oZkx6Jsj51z7-bEjm-0SkjKJ2LLvk5GT_vr3PX3LUzyNP6KiTG8E267uDs3gOwlo5xBD80O6eSKzePrC0NlJ5Q";
-    String appkey = "PSQWZg1NWtcxTTCNYIgJ7LYoacJx38VvCXmQ";
-    String appsecret = "dSPcqjO3Gdk9nJiVnkQSFE8JoDZyZ1XbrJpha+732iU8F98y45rVW45QHR392B38+tCofP6moWQCYK/S6QqW9g+aYS5EPWPEr0UvlEH1thIMqyU2yvApY+Wp/5syOY2j5cnhieyRQDcqRsN/HQalrPxPJbXHgzsu9SS3NmX4hp91w1OJ6cs=";
-
+    @Value("${global.contentType}")
+    private String contentType;
+    @Value("${global.authorization}")
+    private String authorization;
+    @Value("${global.appkey}")
+    private String appkey;
+    @Value("${global.appsecret}")
+    private String appsecret;
     @GetMapping("/api/domestic_stock_price")
     public Map<String, Object> DomesticStockPrice() {
         Map<String, Object> domesticStockPriceMap = new HashMap<>();
@@ -36,7 +35,7 @@ public class MainApiController {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-price";
             String tr_id = "FHKST01010100";
             String param1 = "J";
-            String param2 = "000660";
+            String param2 = "317830";
 
             URL url = new URL(apiUrl + "?fid_cond_mrkt_div_code=" + param1 + "&fid_input_iscd=" + param2);
 
@@ -173,7 +172,7 @@ public class MainApiController {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/search-info";
             String tr_id = "CTPF1604R";
             String custtype = "P";
-            String param1 = "000660";
+            String param1 = "317830";
             String param2 = "300";
 
             URL url = new URL(apiUrl + "?PDNO=" + param1 + "&PRDT_TYPE_CD=" + param2);
@@ -224,70 +223,6 @@ public class MainApiController {
         return commoditySearchMap;
     }
 
-    @GetMapping("/api/closed_days")
-    public Map<String, Object> ClosedDays() {
-        Map<String, Object> closedDaysMap = new HashMap<>();
-
-        try {
-            String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/chk-holiday";
-            String tr_id = "CTCA0903R";
-            String custtype = "P";
-            String param1 = currentDate;
-            String param2 = "";
-            String param3 = "";
-
-            URL url = new URL(apiUrl + "?BASS_DT=" + param1
-                    + "&CTX_AREA_NK=" + param2
-                    + "&CTX_AREA_FK=" + param3
-            );
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-
-            // Set headers
-            conn.setRequestProperty("content-type", contentType);
-            conn.setRequestProperty("authorization", "Bearer "+authorization);
-            conn.setRequestProperty("appKey",appkey);
-            conn.setRequestProperty("appSecret",appsecret);
-            conn.setRequestProperty("tr_id", tr_id);
-            conn.setRequestProperty("custtype", custtype);
-
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode == 200) {
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-
-                in.close();
-
-                String content_type = conn.getHeaderField("content-type");
-                String trid = conn.getHeaderField("tr_id");
-                String trcont = conn.getHeaderField("tr_cont");
-                String gt_uid = conn.getHeaderField("gt_uid");
-
-                // 데이터를 JSON 형태로 responseMap에 추가
-                closedDaysMap.put("content_type", content_type);
-                closedDaysMap.put("tr_id", trid);
-                closedDaysMap.put("tr_cont", trcont);
-                closedDaysMap.put("gt_uid", gt_uid);
-                closedDaysMap.put("response", response.toString());
-            } else {
-                System.out.println("HTTP Request Failed with Response Code: " + responseCode);
-            }
-            System.out.println("responseMap : " + closedDaysMap);
-            conn.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return closedDaysMap;
-    }
-
     @GetMapping("/api/investor_trend_estimate")
     public Map<String, Object> InvestorTrendEstimate() {
         Map<String, Object> investorTrendEstimateMap = new HashMap<>();
@@ -296,7 +231,7 @@ public class MainApiController {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/investor-trend-estimate";
             String tr_id = "HHPTJ04160200";
             String custtype = "P";
-            String param1 = "000660";
+            String param1 = "317830";
 
             URL url = new URL(apiUrl + "?MKSC_SHRN_ISCD=" + param1
             );
@@ -356,7 +291,7 @@ public class MainApiController {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/program-trade-by-stock";
             String tr_id = "FHPPG04650100";
             String custtype = "P";
-            String param1 = "000660";
+            String param1 = "317830";
 
             URL url = new URL(apiUrl + "?fid_input_iscd=" + param1
             );
@@ -416,7 +351,7 @@ public class MainApiController {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/search-info";
             String tr_id = "FHKST01010900";
             String param1 = "J";
-            String param2 = "000660";
+            String param2 = "317830";
 
             URL url = new URL(apiUrl + "?FID_COND_MRKT_DIV_CODE=" + param1 + "&FID_INPUT_ISCD=" + param2);
 
@@ -473,7 +408,7 @@ public class MainApiController {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-member";
             String tr_id = "FHKST01010600";
             String param1 = "J";
-            String param2 = "000660";
+            String param2 = "317830";
 
             URL url = new URL(apiUrl + "?FID_COND_MRKT_DIV_CODE=" + param1 + "&FID_INPUT_ISCD=" + param2);
 
@@ -520,5 +455,67 @@ public class MainApiController {
             e.printStackTrace();
         }
         return memberBuySellCompanySearchMap;
+    }
+
+    @GetMapping("/api/stock_chart_day")
+    public Map<String, Object> StockChartDaySearch() {
+        Map<String, Object> stockChartDaySearchMap = new HashMap<>();
+        try {
+            String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-daily-price";
+            String tr_id = "FHKST01010400";
+            String param1 = "J";
+            String param2 = "317830";
+            String param3 = "D";
+            String param4 = "0";
+
+            URL url = new URL(apiUrl + "?FID_COND_MRKT_DIV_CODE=" + param1
+                    + "&FID_INPUT_ISCD=" + param2
+                    + "&FID_PERIOD_DIV_CODE=" + param3
+                    + "&FID_ORG_ADJ_PRC=" + param4
+            );
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // Set headers
+            conn.setRequestProperty("authorization", "Bearer "+authorization);
+            conn.setRequestProperty("appKey",appkey);
+            conn.setRequestProperty("appSecret",appsecret);
+            conn.setRequestProperty("tr_id", tr_id);
+
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == 200) {
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                in.close();
+
+                String content_type = conn.getHeaderField("content-type");
+                String trid = conn.getHeaderField("tr_id");
+                String tr_cont = conn.getHeaderField("tr_cont");
+                String gt_uid = conn.getHeaderField("gt_uid");
+
+                // 데이터를 JSON 형태로 responseMap에 추가
+                stockChartDaySearchMap.put("content_type", content_type);
+                stockChartDaySearchMap.put("tr_id", trid);
+                stockChartDaySearchMap.put("tr_cont", tr_cont);
+                stockChartDaySearchMap.put("gt_uid", gt_uid);
+                stockChartDaySearchMap.put("response", response.toString());
+            } else {
+                System.out.println("HTTP Request Failed with Response Code: " + responseCode);
+            }
+            System.out.println("responseMap : " + stockChartDaySearchMap);
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stockChartDaySearchMap;
     }
 }
