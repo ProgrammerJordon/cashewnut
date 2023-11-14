@@ -18,9 +18,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class HomeApiController {
 
-    /**
-     * 기본 접근 권한 및 토큰
-     */
     Date date = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     String currentDate = dateFormat.format(date);
@@ -33,7 +30,6 @@ public class HomeApiController {
     private String appkey;
     @Value("${global.appsecret}")
     private String appsecret;
-
     @GetMapping("/api/closed_days")
     public Map<String, Object> ClosedDays() {
         Map<String, Object> closedDaysMap = new HashMap<>();
@@ -90,11 +86,77 @@ public class HomeApiController {
             } else {
                 System.out.println("HTTP Request Failed with Response Code: " + responseCode);
             }
-            System.out.println("responseMap : " + closedDaysMap);
+            System.out.println("ClosedDaysMap : " + closedDaysMap);
             conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return closedDaysMap;
+    }
+
+    @GetMapping("/api/dowJonesIndex")
+    public Map<String, Object> DowJonesIndex() {
+        Map<String, Object> dowJonesIndexMap = new HashMap<>();
+
+        try {
+            String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/overseas-price/v1/quotations/inquire-daily-chartprice";
+            String tr_id = "FHKST03030100";
+            String param1 = "N";
+            String param2 = ".DJI";
+            String param3 = currentDate;
+            String param4 = currentDate;
+            String param5 = "D";
+
+            URL url = new URL(apiUrl + "?FID_COND_MRKT_DIV_CODE=" + param1
+                    + "&FID_INPUT_ISCD=" + param2
+                    + "&FID_INPUT_DATE_1=" + param3
+                    + "&FID_INPUT_DATE_2=" + param4
+                    + "&FID_PERIOD_DIV_CODE=" + param5
+            );
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // Set headers
+            conn.setRequestProperty("content-type", contentType);
+            conn.setRequestProperty("authorization", "Bearer "+authorization);
+            conn.setRequestProperty("appKey",appkey);
+            conn.setRequestProperty("appSecret",appsecret);
+            conn.setRequestProperty("tr_id", tr_id);
+
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == 200) {
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                in.close();
+
+                String content_type = conn.getHeaderField("content-type");
+                String trid = conn.getHeaderField("tr_id");
+                String trcont = conn.getHeaderField("tr_cont");
+                String gt_uid = conn.getHeaderField("gt_uid");
+
+                // 데이터를 JSON 형태로 responseMap에 추가
+                dowJonesIndexMap.put("content_type", content_type);
+                dowJonesIndexMap.put("tr_id", trid);
+                dowJonesIndexMap.put("tr_cont", trcont);
+                dowJonesIndexMap.put("gt_uid", gt_uid);
+                dowJonesIndexMap.put("response", response.toString());
+            } else {
+                System.out.println("HTTP Request Failed with Response Code: " + responseCode);
+            }
+            System.out.println("DowJonesIndexMap : " + dowJonesIndexMap);
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dowJonesIndexMap;
     }
 }

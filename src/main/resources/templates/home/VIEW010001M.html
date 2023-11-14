@@ -7,11 +7,20 @@
   <div th:class="h3">휴장일</div>
   <div id="closedDays_Table"></div>
 </div>
+<div>
+  <div th:class="h3">세계지수</div>
+  <div id="worldIndex_Table"></div>
+</div>
 <div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
 <script>
   let closedDays_Table;
+  let worldIndex_Table;
+
+  //API 객체값 담는 배열 선언
+  let worldIndex = [];
+
   function init() {
     closedDays_Table = new Tabulator("#closedDays_Table", {
       width: "400px",
@@ -20,16 +29,31 @@
       resizableColumnFit: true,
       columns: [
         {title: "날짜", field: "bass_dt", resizable: true},
-        {title: "요일구분코드", field: "wday_dvsn_cd", resizable: true},
+        {title: "요일구분", field: "wday_dvsn_cd", resizable: true},
         //{ title: "영업일여부", field: "bzdy_yn", resizable: true },
         //{ title: "거래일여부", field: "tr_day_yn", resizable: true },
         {title: "개장일여부", field: "opnd_yn", resizable: true}
       ],
     });
 
+    worldIndex_Table = new Tabulator("#worldIndex_Table", {
+      width: "400px",
+      height: "300px",
+      layout: "fitDataTable",
+      resizableColumnFit: true,
+      columns: [
+        {title: "지수", field: "stck_shrn_iscd", resizable: true},
+        {title: "현재가", field: "ovrs_nmix_prpr", resizable: true},
+        {title: "전일대비", field: "ovrs_nmix_prdy_vrss", resizable: true },
+        {title: "전일대비율", field: "prdy_ctrt", resizable: true},
+        {title: "추세", field: "prdy_vrss_sign", resizable: true },
+        {title: "시가", field: "ovrs_prod_oprc", resizable: true },
+        {title: "최고가", field: "ovrs_prod_hgpr", resizable: true },
+        {title: "최저가", field: "ovrs_prod_lwpr", resizable: true }
+      ],
+    });
+
   }
-
-
 
   function closedDaysInq() {
     let callback = (result) => {
@@ -41,11 +65,11 @@
       for (let i = 0; i < JSONData.output.length; i++) {
         let rowJSONData = JSONData.output[i];
         let rowData = {
-          bass_dt: rowJSONData.bass_dt,
-          wday_dvsn_cd: rowJSONData.wday_dvsn_cd,
-          bzdy_yn: rowJSONData.bzdy_yn,
-          tr_day_yn: rowJSONData.tr_day_yn,
-          opnd_yn: rowJSONData.opnd_yn
+          bass_dt: formatYmdDate(rowJSONData.bass_dt),
+          wday_dvsn_cd: wdayDvsnCd(rowJSONData.wday_dvsn_cd),
+          //bzdy_yn: rowJSONData.bzdy_yn,
+          //tr_day_yn: rowJSONData.tr_day_yn,
+          opnd_yn: opndYn(rowJSONData.opnd_yn)
         };
         resultArray.push(rowData);
       }
@@ -54,9 +78,30 @@
     RequestUrl('/api/closed_days', 'GET', '', callback);
   }
 
+  function dowJonesIndex() {
+    let callback = (result) => {
+      let data = result.response;
+      let JSONData = JSON.parse(data);
+
+        let rowData = {
+          stck_shrn_iscd: JSONData.output1.stck_shrn_iscd,
+          ovrs_nmix_prpr: JSONData.output1.ovrs_nmix_prpr,
+          ovrs_nmix_prdy_vrss: JSONData.output1.ovrs_nmix_prdy_vrss,
+          prdy_ctrt: JSONData.output1.prdy_ctrt,
+          prdy_vrss_sign: prdyVrssSign(JSONData.output1.prdy_vrss_sign),
+          ovrs_prod_oprc: JSONData.output1.ovrs_prod_oprc,
+          ovrs_prod_hgpr: JSONData.output1.ovrs_prod_hgpr,
+          ovrs_prod_lwpr: JSONData.output1.ovrs_prod_lwpr,
+        };
+      worldIndex.push(rowData);
+      worldIndex_Table.setData(worldIndex);
+    };
+    RequestUrl('/api/dowJonesIndex', 'GET', '', callback);
+  }
 
   $(function() {
     init();
     closedDaysInq();
+    dowJonesIndex();
   });
 </script>
