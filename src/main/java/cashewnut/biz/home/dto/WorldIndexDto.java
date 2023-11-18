@@ -3,9 +3,13 @@ package cashewnut.biz.home.dto;
 import lombok.Data;
 
 @Data
-public class DowJonesIndexDto {
+public class WorldIndexDto {
     private String fidInputIscd; // 종목코드
-    public DowJonesIndexDto(String fidInputIscd) {
+
+    public WorldIndexDto() {
+        // 기본생성자
+    };
+    public WorldIndexDto(String fidInputIscd) {
         this.fidInputIscd = fidInputIscd;
     }
     @Override

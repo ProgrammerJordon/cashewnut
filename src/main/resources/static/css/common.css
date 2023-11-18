@@ -307,6 +307,11 @@ img {
     display: flex;
 }
 
+.flex-width-around {
+    display: flex;
+    justify-content: space-around;
+}
+
 .flex-around {
     display: flex;
     justify-content: space-around;
@@ -377,10 +382,33 @@ img {
     width: 60px;
     heigth: 30px;
     border-radius: 5px;
-    border: 0;
+    border: 1px solid #2058B633;
     background: linear-gradient(to right, rgba(32, 88, 182, 0.2), rgba(12, 32, 65, 0), rgba(235, 235, 235, 1));
-
 }
+
+.search_Btn {
+    width: 50px;
+    heigth: 25px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.search_box {
+    width: 250px;
+    height: 25px;
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px;
+    background: linear-gradient(to right, rgba(13, 53, 120, 0.2), rgba(12, 32, 65, 0), rgba(235, 235, 235, 1));
+}
+
+.search_container {
+    background: #ededed;
+    border-radius: 5px;
+    border: 1px solid #2058B633;
+}
+
+
 /*
 Navigator Bar
 */

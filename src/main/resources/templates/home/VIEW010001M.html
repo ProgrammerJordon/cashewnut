@@ -11,22 +11,23 @@
   <div th:class="h3">세계지수</div>
   <div id="worldIndex_Table"></div>
 </div>
+<div>
+  <div th:class="h3">업종별지수</div>
+  <div id="themaTotalIndex_Table"></div>
+</div>
 <div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
 <script>
   let closedDays_Table;
   let worldIndex_Table;
-
-  //API 객체값 담는 배열 선언
-  let worldIndex = [];
+  let themaTotalIndex_Table;
 
   function init() {
     closedDays_Table = new Tabulator("#closedDays_Table", {
       width: "400px",
       height: "300px",
       layout: "fitDataTable",
-      resizableColumnFit: true,
       columns: [
         {title: "날짜", field: "bass_dt", resizable: true},
         {title: "요일구분", field: "wday_dvsn_cd", resizable: true},
@@ -40,9 +41,8 @@
       width: "400px",
       height: "300px",
       layout: "fitDataTable",
-      resizableColumnFit: true,
       columns: [
-        {title: "지수", field: "stck_shrn_iscd", resizable: true},
+        {title: "지수", field: "hts_kor_isnm", resizable: true},
         {title: "현재가", field: "ovrs_nmix_prpr", resizable: true},
         {title: "전일대비", field: "ovrs_nmix_prdy_vrss", resizable: true },
         {title: "전일대비율", field: "prdy_ctrt", resizable: true},
@@ -50,6 +50,20 @@
         {title: "시가", field: "ovrs_prod_oprc", resizable: true },
         {title: "최고가", field: "ovrs_prod_hgpr", resizable: true },
         {title: "최저가", field: "ovrs_prod_lwpr", resizable: true }
+      ],
+    });
+
+    themaTotalIndex_Table = new Tabulator("#themaTotalIndex_Table", {
+      width: "400px",
+      height: "300px",
+      layout: "fitDataTable",
+      columns: [
+        {title: "지수명", field: "hts_kor_isnm", resizable: true},
+        {title: "업종 지수 현재가", field: "bstp_nmix_prpr", resizable: true},
+        {title: "업종 지수 전일 대비", field: "bstp_nmix_prdy_vrss", resizable: true },
+        {title: "업종 지수 전일 대비율", field: "bstp_nmix_prdy_ctrt", resizable: true},
+        {title: "추세", field: "prdy_vrss_sign", resizable: true },
+        {title: "누적 거래량", field: "acml_vol", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true }
       ],
     });
 
@@ -78,30 +92,82 @@
     RequestUrl('/api/closed_days', 'GET', '', callback);
   }
 
-  function dowJonesIndex() {
+  function worldStockIndex() {
+    //API 객체값 담는 배열 선언
+    let worldIndex = [];
+    // 다우존스, S&P, 항생, 코스피, 다우유틸리지지수 ... 국가지수
+    let fidInputIscd = ['.DJI', 'SPX', 'CH#SHA', 'CH#SHB', 'CH#000300', 'CH#000905', 'CH#SZA', 'CH#SZB', 'SHANG', 'HK#HS', 'KOSPI', 'JP#NI225', 'TW#WT', 'GB#FTSE', 'GR#DAX', 'FR#CAC', 'RU#RTS', 'DEN#KFX', 'SW#SM', 'NL#AEX', 'POL#WIG', 'NZ#NZSE', 'PT#PSI', 'GR#ASE', 'IN#BOMBAY', 'MX#IPC', 'VEB', 'ID#JK', 'MERV', 'MY#KLSE', 'PH#MANILA' ];
     let callback = (result) => {
       let data = result.response;
       let JSONData = JSON.parse(data);
-
-        let rowData = {
-          stck_shrn_iscd: JSONData.output1.stck_shrn_iscd,
-          ovrs_nmix_prpr: JSONData.output1.ovrs_nmix_prpr,
-          ovrs_nmix_prdy_vrss: JSONData.output1.ovrs_nmix_prdy_vrss,
-          prdy_ctrt: JSONData.output1.prdy_ctrt,
-          prdy_vrss_sign: prdyVrssSign(JSONData.output1.prdy_vrss_sign),
-          ovrs_prod_oprc: JSONData.output1.ovrs_prod_oprc,
-          ovrs_prod_hgpr: JSONData.output1.ovrs_prod_hgpr,
-          ovrs_prod_lwpr: JSONData.output1.ovrs_prod_lwpr,
-        };
+      let rowData = {
+        hts_kor_isnm: JSONData.output1.hts_kor_isnm,
+        ovrs_nmix_prpr: JSONData.output1.ovrs_nmix_prpr,
+        ovrs_nmix_prdy_vrss: JSONData.output1.ovrs_nmix_prdy_vrss,
+        prdy_ctrt: JSONData.output1.prdy_ctrt,
+        prdy_vrss_sign: prdyVrssSign(JSONData.output1.prdy_vrss_sign),
+        ovrs_prod_oprc: JSONData.output1.ovrs_prod_oprc,
+        ovrs_prod_hgpr: JSONData.output1.ovrs_prod_hgpr,
+        ovrs_prod_lwpr: JSONData.output1.ovrs_prod_lwpr,
+      };
       worldIndex.push(rowData);
       worldIndex_Table.setData(worldIndex);
     };
-    RequestUrl('/api/dowJonesIndex', 'GET', '', callback);
+    for(let i = 0; i < fidInputIscd.length; i ++) {
+      let JSONparam = {fidInputIscd : fidInputIscd[i]}
+      RequestUrl('/api/worldStockIndex', 'POST', JSONparam, callback);
+    }
   }
+
+  function themaTotalIndex(param) {
+    let themaIndexId;
+    let themaIndexYmd;
+    if(param != null && param !="") {
+      themaIndexId = document.getElementById("themaIndexId").value;
+      themaIndexYmd = document.getElementById("themaIndexYmd").value;
+    }
+    let JSONparam = {
+      fidInputIscd : themaIndexId,
+      fidPeriodDivCode : themaIndexYmd
+    };
+    // 업종코드
+    let fidInputIscd = ['0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008',  '0009', '0010',
+      '0011', '0012', '0013', '0014', '0015', '0016', '0017', '0018', '0019', '0020', '0021', '0022',
+      '0023', '0024', '0025', '0026', '0027'];
+
+    let resultArray = [];
+    let callback = (result) => {
+      let data = result.response;
+      let JSONData = JSON.parse(data);
+      let rowData = {
+        hts_kor_isnm: JSONData.output1.hts_kor_isnm,
+        bstp_nmix_prpr: JSONData.output1.bstp_nmix_prpr,
+        bstp_nmix_prdy_vrss: JSONData.output1.bstp_nmix_prdy_vrss,
+        bstp_nmix_prdy_ctrt: JSONData.output1.bstp_nmix_prdy_ctrt,
+        prdy_vrss_sign: prdyVrssSign(JSONData.output1.prdy_vrss_sign),
+        acml_vol: JSONData.output1.acml_vol
+      };
+      resultArray.push(rowData);
+      themaTotalIndex_Table.setData(resultArray);
+    };
+    if(param != null && param != "") {
+      RequestUrl('/api/themaTotalIndex', 'POST', JSONparam, callback);
+    } else {
+      for (let i = 0; i < fidInputIscd.length; i++) {
+        JSONparam = {
+          fidInputIscd: fidInputIscd[i]
+        };
+        RequestUrl('/api/themaTotalIndex', 'POST', JSONparam, callback);
+      }
+    }
+  }
+
+
 
   $(function() {
     init();
     closedDaysInq();
-    dowJonesIndex();
+    worldStockIndex();
+    themaTotalIndex();
   });
 </script>

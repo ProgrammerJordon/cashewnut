@@ -26,7 +26,7 @@ public class DomesticApiController {
     private String appkey;
     @Value("${global.appsecret}")
     private String appsecret;
-    private String basicStockId = "317830"; // 에스피시스템즈
+    private String basicStockId = "005930"; // 삼성전자
     @RequestMapping("/api/domestic_stock_price")
     public Map<String, Object> DomesticStockPrice(@RequestBody DomesticStockDto domesticStockDto) {
         Map<String, Object> domesticStockPriceMap = new HashMap<>();
@@ -479,13 +479,16 @@ public class DomesticApiController {
     }
 
     @RequestMapping("/api/stock_chart_day")
-    public Map<String, Object> StockChartDaySearch() {
+    public Map<String, Object> StockChartDaySearch(@RequestBody DomesticStockDto domesticStockDto) {
         Map<String, Object> stockChartDaySearchMap = new HashMap<>();
         try {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-daily-price";
             String tr_id = "FHKST01010400";
             String param1 = "J";
-            String param2 = "317830";
+            String param2 = basicStockId;
+            if(domesticStockDto.getStockId() != null && domesticStockDto.getStockId() != "") {
+                param2 = domesticStockDto.getStockId();
+            }
             String param3 = "D";
             String param4 = "0";
 
@@ -532,7 +535,7 @@ public class DomesticApiController {
             } else {
                 System.out.println("HTTP Request Failed with Response Code: " + responseCode);
             }
-            System.out.println("responseMap : " + stockChartDaySearchMap);
+            System.out.println("StockChartDaySearchMap : " + stockChartDaySearchMap);
             conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
@@ -541,13 +544,16 @@ public class DomesticApiController {
     }
 
     @RequestMapping("/api/stock_chart_week")
-    public Map<String, Object> StockChartWeekSearch() {
+    public Map<String, Object> StockChartWeekSearch(@RequestBody DomesticStockDto domesticStockDto) {
         Map<String, Object> stockChartDaySearchMap = new HashMap<>();
         try {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-daily-price";
             String tr_id = "FHKST01010400";
             String param1 = "J";
-            String param2 = "317830";
+            String param2 = basicStockId;
+            if(domesticStockDto.getStockId() != null && domesticStockDto.getStockId() != "") {
+                param2 = domesticStockDto.getStockId();
+            }
             String param3 = "W";
             String param4 = "0";
 
@@ -594,7 +600,7 @@ public class DomesticApiController {
             } else {
                 System.out.println("HTTP Request Failed with Response Code: " + responseCode);
             }
-            System.out.println("responseMap : " + stockChartDaySearchMap);
+            System.out.println("StockChartWeekSearchMap : " + stockChartDaySearchMap);
             conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
@@ -603,13 +609,16 @@ public class DomesticApiController {
     }
 
     @RequestMapping("/api/stock_chart_month")
-    public Map<String, Object> StockChartMonthSearch() {
+    public Map<String, Object> StockChartMonthSearch(@RequestBody DomesticStockDto domesticStockDto) {
         Map<String, Object> stockChartDaySearchMap = new HashMap<>();
         try {
             String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-daily-price";
             String tr_id = "FHKST01010400";
             String param1 = "J";
-            String param2 = "317830";
+            String param2 = basicStockId;
+            if(domesticStockDto.getStockId() != null && domesticStockDto.getStockId() != "") {
+                param2 = domesticStockDto.getStockId();
+            }
             String param3 = "M";
             String param4 = "0";
 
@@ -656,7 +665,7 @@ public class DomesticApiController {
             } else {
                 System.out.println("HTTP Request Failed with Response Code: " + responseCode);
             }
-            System.out.println("responseMap : " + stockChartDaySearchMap);
+            System.out.println("StockChartMonthSearchMap : " + stockChartDaySearchMap);
             conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
