@@ -182,3 +182,8 @@ function formatHHMMSSTime(param) {
     return hours + ':' + minutes + ':' + seconds;
 }
 
+function SubstringDateMd (param) {
+    let year = param.substring(0, 2); // 앞의 2자리
+    let month = param.substring(2, 4); // 뒤의 2자리
+    return year+"/"+month;
+}

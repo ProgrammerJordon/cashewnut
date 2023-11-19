@@ -15,6 +15,10 @@
   <div th:class="h3">업종별지수</div>
   <div id="themaTotalIndex_Table"></div>
 </div>
+<div>
+  <div th:class="h3">거래대금 상위랭크 30</div>
+  <div id="transactionAmount_Table"></div>
+</div>
 <div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
@@ -22,6 +26,7 @@
   let closedDays_Table;
   let worldIndex_Table;
   let themaTotalIndex_Table;
+  let transactionAmount_Table;
 
   function init() {
     closedDays_Table = new Tabulator("#closedDays_Table", {
@@ -67,6 +72,25 @@
       ],
     });
 
+    transactionAmount_Table = new Tabulator("#transactionAmount_Table", {
+      width: "400px",
+      height: "300px",
+      layout: "fitDataTable",
+      resizableColumnFit: true,
+      columns: [
+        {title: "순위", field: "data_rank", resizable: true},
+        {title: "종목명", field: "hts_kor_isnm", resizable: true},
+        {title: "현재가", field: "stck_prpr", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+        {title: "전일 대비", field: "prdy_vrss", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+        {title: "전일 대비율", field: "prdy_ctrt", resizable: true},
+        {title: "추세", field: "prdy_vrss_sign", resizable: true},
+        {title: "거래량", field: "acml_vol", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+        {title: "거래량 증가율", field: "vol_inrt", resizable: true},
+        {title: "거래량 회전율", field: "vol_tnrt", resizable: true},
+        {title: "거래대금", field: "acml_tr_pbmn", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+        {title: "거래대금 회전율", field: "tr_pbmn_tnrt", resizable: true}
+      ],
+    });
   }
 
   function closedDaysInq() {
@@ -162,6 +186,36 @@
     }
   }
 
+  function transactionAmountInq() {
+    let callback = (result) => {
+      let data = result.response;
+      let JSONData = JSON.parse(data);
+
+      let resultArray = [];
+
+      for (let i = 0; i < JSONData.output.length; i++) {
+        let rowJSONData = JSONData.output[i];
+
+        let rowData = {
+          data_rank: rowJSONData.data_rank,
+          hts_kor_isnm: rowJSONData.hts_kor_isnm,
+          stck_prpr: rowJSONData.stck_prpr,
+          prdy_vrss: rowJSONData.prdy_vrss,
+          prdy_ctrt: rowJSONData.prdy_ctrt,
+          prdy_vrss_sign: prdyVrssSign(rowJSONData.prdy_vrss_sign),
+          acml_vol: rowJSONData.acml_vol,
+          vol_inrt: rowJSONData.vol_inrt,
+          vol_tnrt: rowJSONData.vol_tnrt,
+          acml_tr_pbmn: rowJSONData.acml_tr_pbmn,
+          tr_pbmn_tnrt: rowJSONData.tr_pbmn_tnrt
+        };
+        resultArray.push(rowData);
+      }
+      transactionAmount_Table.setData(resultArray);
+    };
+    RequestUrl('/api/transaction_amount', 'GET', '', callback);
+  }
+
 
 
   $(function() {
@@ -169,5 +223,6 @@
     closedDaysInq();
     worldStockIndex();
     themaTotalIndex();
+    transactionAmountInq();
   });
 </script>

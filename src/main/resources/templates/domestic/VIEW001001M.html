@@ -5,14 +5,10 @@
 <div th:replace="/prefix/header :: headerfragment"></div>
 <div th:class="flex-center">
     <div th:class="container">
-        <div th:class="'flex-width-around align-center'">
+        <div th:class="'flex-around align-center'">
             <div th:class="'flex align-center'">
-                <div th:class="margin-rigth10">
-                    <img th:src="@{/image/default.png}">
-                </div>
                 <div>
-                    <div>기업정보</div>
-                    <div>좀목코드 & 종목명</div>
+                    <div></div>
                 </div>
             </div>
             <div>
@@ -24,9 +20,78 @@
         </div>
         <div th:class="flex-width-around">
             <div th:class="flex-direction">
-                <div th:class="margin10">
-                    <div th:class="h3">거래대금 상위랭크 30</div>
-                    <div id="transactionAmount_Table"></div>
+                <div th:class="'flex margin10'">
+                    <div th:class="'flex-direction margin-rigth10'">
+                        <div>
+                            <img th:class="logo-area" th:src="@{/image/default.png}">
+                        </div>
+                        <div>
+                            <div><h3>기업소개</h3></div>
+                            <div>기업소개에 대한 내용</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div th:class="flex-between">
+                            <div></div>
+                            <div><h2><span>종목번호</span>&nbsp;<span>종목명</span></h2></div>
+                        </div>
+                        <div>
+                            <div>
+                                <table th:class="logo-area">
+                                    <tr>
+                                        <th th:colspan="3">매수상위</th>
+                                        <th th:colspan="3">매도상위</th>
+                                    </tr>
+                                    <tr>
+                                        <th>증권사</th>
+                                        <td>미래에셋증권</td>
+                                        <td>10000</td>
+                                        <th>증권사</th>
+                                        <td>한국투자증권</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>증권사</th>
+                                        <td>미래에셋증권</td>
+                                        <td>10000</td>
+                                        <th>증권사</th>
+                                        <td>한국투자증권</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>증권사</th>
+                                        <td>미래에셋증권</td>
+                                        <td>10000</td>
+                                        <th>증권사</th>
+                                        <td>한국투자증권</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>증권사</th>
+                                        <td>미래에셋증권</td>
+                                        <td>10000</td>
+                                        <th>증권사</th>
+                                        <td>한국투자증권</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>증권사</th>
+                                        <td>미래에셋증권</td>
+                                        <td>10000</td>
+                                        <th>증권사</th>
+                                        <td>한국투자증권</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>매수총합</th>
+                                        <td th:colspan="2">10000</td>
+                                        <th>매도총합</th>
+                                        <td th:colspan="2">20000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div th:class="margin10">
                     <div th:class="h3">가치투자</div>
@@ -98,7 +163,6 @@
 <script>
     let dometisStockPrice_Table;
     let dometisStockValue_Table;
-    let transactionAmount_Table;
     let commoditySearch_Table;
     let investorTrendEstimate_Table;
     let programTradeEstimate_Table;
@@ -115,57 +179,15 @@
                 {title: "시장구분", field: "rprs_mrkt_kor_name", resizable: true},
                 {title: "종목코드", field: "stck_shrn_iscd", resizable: true},
                 {title: "업종", field: "bstp_kor_isnm", resizable: true},
-                {
-                    title: "거래량",
-                    field: "acml_vol",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
-                {
-                    title: "현재가",
-                    field: "stck_prpr",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
+                {title: "거래량", field: "acml_vol", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+                {title: "현재가", field: "stck_prpr", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
                 {title: "전일대비", field: "prdy_ctrt", formatter: "money", resizable: true},
-                {
-                    title: "누적거래대금",
-                    field: "acml_tr_pbmn",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
+                {title: "누적거래대금", field: "acml_tr_pbmn", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
                 {title: "전일대비 거래량비율", field: "prdy_vrss_vol_rate", resizable: true},
-                {
-                    title: "외국인순매수수량",
-                    field: "frgn_ntby_qty",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
-                {
-                    title: "프로그램매매 순매수수량",
-                    field: "pgtr_ntby_qty",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
-                {
-                    title: "52주일최고가",
-                    field: "w52_hgpr",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
-                {
-                    title: "52주일최저가",
-                    field: "w52_lwpr",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
+                {title: "외국인순매수수량", field: "frgn_ntby_qty", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+                {title: "프로그램매매 순매수수량", field: "pgtr_ntby_qty", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+                {title: "52주일최고가", field: "w52_hgpr", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+                {title: "52주일최저가", field: "w52_lwpr", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
                 {title: "52주 최고가대비 현재가비율", field: "w52_hgpr_vrss_prpr_ctrt", resizable: true},
                 {title: "52주 최저가대비 현재가비율", field: "w52_lwpr_vrss_prpr_ctrt", resizable: true}
             ],
@@ -190,26 +212,6 @@
                 {title: "신용잔고 비율", field: "whol_loan_rmnd_rate", resizable: true},
                 {title: "공매도 수량", field: "last_ssts_cntg_qty", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
                 {title: "공매도여부", field: "ssts_yn", resizable: true}
-            ],
-        });
-
-        transactionAmount_Table = new Tabulator("#transactionAmount_Table", {
-            width: "400px",
-            height: "300px",
-            layout: "fitDataTable",
-            resizableColumnFit: true,
-            columns: [
-                {title: "순위", field: "data_rank", resizable: true},
-                {title: "종목명", field: "hts_kor_isnm", resizable: true},
-                {title: "현재가", field: "stck_prpr", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
-                {title: "전일 대비", field: "prdy_vrss", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
-                {title: "전일 대비율", field: "prdy_ctrt", resizable: true},
-                {title: "추세", field: "prdy_vrss_sign", resizable: true},
-                {title: "거래량", field: "acml_vol", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
-                {title: "거래량 증가율", field: "vol_inrt", resizable: true},
-                {title: "거래량 회전율", field: "vol_tnrt", resizable: true},
-                {title: "거래대금", field: "acml_tr_pbmn", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
-                {title: "거래대금 회전율", field: "tr_pbmn_tnrt", resizable: true}
             ],
         });
 
@@ -243,27 +245,9 @@
             resizableColumnFit: true,
             columns: [
                 {title: "시간", field: "bsop_hour_gb", resizable: true},
-                {
-                    title: "외국인수량(가집계)",
-                    field: "frgn_fake_ntby_qty",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
-                {
-                    title: "기관수량(가집계)",
-                    field: "orgn_fake_ntby_qty",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                },
-                {
-                    title: "합산수량(가집계)",
-                    field: "sum_fake_ntby_qty",
-                    formatter: "money",
-                    formatterParams: {thousand: ",", precision: "0"},
-                    resizable: true
-                }
+                {title: "외국인수량(가집계)", field: "frgn_fake_ntby_qty", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+                {title: "기관수량(가집계)", field: "orgn_fake_ntby_qty", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true},
+                {title: "합산수량(가집계)", field: "sum_fake_ntby_qty", formatter: "money", formatterParams: {thousand: ",", precision: "0"}, resizable: true}
             ],
         });
 
@@ -356,36 +340,6 @@
             dometisStockValue_Table.setData([rowValueData]);
         };
         RequestUrl('/api/domestic_stock_price', 'POST', JSONparam, callback);
-    }
-
-    function transactionAmountInq() {
-        let callback = (result) => {
-            let data = result.response;
-            let JSONData = JSON.parse(data);
-
-            let resultArray = [];
-
-            for (let i = 0; i < JSONData.output.length; i++) {
-                let rowJSONData = JSONData.output[i];
-
-                let rowData = {
-                    data_rank: rowJSONData.data_rank,
-                    hts_kor_isnm: rowJSONData.hts_kor_isnm,
-                    stck_prpr: rowJSONData.stck_prpr,
-                    prdy_vrss: rowJSONData.prdy_vrss,
-                    prdy_ctrt: rowJSONData.prdy_ctrt,
-                    prdy_vrss_sign: prdyVrssSign(rowJSONData.prdy_vrss_sign),
-                    acml_vol: rowJSONData.acml_vol,
-                    vol_inrt: rowJSONData.vol_inrt,
-                    vol_tnrt: rowJSONData.vol_tnrt,
-                    acml_tr_pbmn: rowJSONData.acml_tr_pbmn,
-                    tr_pbmn_tnrt: rowJSONData.tr_pbmn_tnrt
-                };
-                resultArray.push(rowData);
-            }
-            transactionAmount_Table.setData(resultArray);
-        };
-        RequestUrl('/api/transaction_amount', 'GET', '', callback);
     }
 
     function commoditySearchInq(param) {
@@ -539,7 +493,7 @@
             for (let i = 0; i < JSONData.output.length; i++) {
                 let rowJSONData = JSONData.output[i];
 
-                labels.push(rowJSONData.stck_bsop_date.substring(4, 8));
+                labels.push(SubstringDateMd(rowJSONData.stck_bsop_date.substring(4, 8)));
                 stockPrices.push(rowJSONData.stck_clpr);
             }
             labels.reverse();
@@ -592,7 +546,7 @@
             for (let i = 0; i < JSONData.output.length; i++) {
                 let rowJSONData = JSONData.output[i];
 
-                labels.push(rowJSONData.stck_bsop_date.substring(4, 8));
+                labels.push(SubstringDateMd(rowJSONData.stck_bsop_date.substring(4, 8)));
                 stockPrices.push(rowJSONData.stck_clpr);
             }
             labels.reverse();
@@ -685,7 +639,6 @@
     $(function () {
         init();
         dometisStockPriceInq();
-        transactionAmountInq();
         commoditySearchInq();
         investorTrendEstimateInq();
         programTradeEstimateInq();

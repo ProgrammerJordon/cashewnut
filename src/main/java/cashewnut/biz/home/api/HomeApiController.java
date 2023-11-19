@@ -245,4 +245,84 @@ public class HomeApiController {
         }
         return themaTotalIndexMap;
     }
+
+    @RequestMapping("/api/transaction_amount")
+    public Map<String, Object>TransactionAmount() {
+        Map<String, Object> transactionAmountMap = new HashMap<>();
+
+        try {
+            String apiUrl = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/volume-rank";
+            String tr_id = "FHPST01710000";
+            String custtype = "P";
+            String param1 = "J";
+            String param2 = "20171";
+            String param3 = "0000";
+            String param4 = "0";
+            String param5 = "3";
+            String param6 = "111111111";
+            String param7 = "000000";
+            String param8 = "";
+            String param9 = "";
+            String param10 = "";
+            String param11 = "";
+
+            URL url = new URL(apiUrl + "?FID_COND_MRKT_DIV_CODE=" + param1
+                    + "&FID_COND_SCR_DIV_CODE=" + param2
+                    + "&FID_INPUT_ISCD=" + param3
+                    + "&FID_DIV_CLS_CODE=" + param4
+                    + "&FID_BLNG_CLS_CODE=" + param5
+                    + "&FID_TRGT_CLS_CODE=" + param6
+                    + "&FID_TRGT_EXLS_CLS_CODE=" + param7
+                    + "&FID_INPUT_PRICE_1=" + param8
+                    + "&FID_INPUT_PRICE_2=" + param9
+                    + "&FID_VOL_CNT=" + param10
+                    + "&FID_INPUT_DATE_1=" + param11
+            );
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // Set headers
+            conn.setRequestProperty("content-type", contentType);
+            conn.setRequestProperty("authorization", "Bearer "+authorization);
+            conn.setRequestProperty("appKey",appkey);
+            conn.setRequestProperty("appSecret",appsecret);
+            conn.setRequestProperty("tr_id", tr_id);
+            conn.setRequestProperty("custtype", custtype);
+
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == 200) {
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                in.close();
+
+                String content_type = conn.getHeaderField("content-type");
+                String trid = conn.getHeaderField("tr_id");
+                String tr_cont = conn.getHeaderField("tr_cont");
+                String gt_uid = conn.getHeaderField("gt_uid");
+
+                // 데이터를 JSON 형태로 responseMap에 추가
+                transactionAmountMap.put("content_type", content_type);
+                transactionAmountMap.put("tr_id", trid);
+                transactionAmountMap.put("tr_cont", tr_cont);
+                transactionAmountMap.put("gt_uid", gt_uid);
+                transactionAmountMap.put("response", response.toString());
+            } else {
+                System.out.println("HTTP Request Failed with Response Code: " + responseCode);
+            }
+            System.out.println("responseMap : " + transactionAmountMap);
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return transactionAmountMap;
+    }
 }
