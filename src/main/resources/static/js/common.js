@@ -187,3 +187,9 @@ function SubstringDateMd (param) {
     let month = param.substring(2, 4); // 뒤의 2자리
     return year+"/"+month;
 }
+
+function thousandComma(param) {
+    // 정규식을 사용하여 1000단위로 쉼표 추가
+    let number = param.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return number;
+}

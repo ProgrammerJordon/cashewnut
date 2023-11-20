@@ -33,60 +33,64 @@
                     <div>
                         <div th:class="flex-between">
                             <div></div>
-                            <div><h2><span>종목번호</span>&nbsp;<span>종목명</span></h2></div>
+                            <div><h2><span id="shtn_pdno">종목번호</span>&nbsp;<span id="prdt_abrv_name"></span></h2></div>
                         </div>
                         <div>
                             <div>
-                                <table th:class="logo-area">
+                                <table th:class="'table-area text-center'">
                                     <tr>
                                         <th th:colspan="3">매수상위</th>
                                         <th th:colspan="3">매도상위</th>
                                     </tr>
                                     <tr>
-                                        <th>증권사</th>
-                                        <td>미래에셋증권</td>
-                                        <td>10000</td>
-                                        <th>증권사</th>
-                                        <td>한국투자증권</td>
-                                        <td>10000</td>
+                                        <th id="shnu_mbcr_name1"></th>
+                                        <td id="total_shnu_qty1"></td>
+                                        <td id="shnu_mbcr_rlim1"></td>
+                                        <th id="seln_mbcr_name1"></th>
+                                        <td id="total_seln_qty1"></td>
+                                        <td id="seln_mbcr_rlim1"></td>
                                     </tr>
                                     <tr>
-                                        <th>증권사</th>
-                                        <td>미래에셋증권</td>
-                                        <td>10000</td>
-                                        <th>증권사</th>
-                                        <td>한국투자증권</td>
-                                        <td>10000</td>
+                                        <th id="shnu_mbcr_name2"></th>
+                                        <td id="total_shnu_qty2"></td>
+                                        <td id="shnu_mbcr_rlim2"></td>
+                                        <th id="seln_mbcr_name2"></th>
+                                        <td id="total_seln_qty2"></td>
+                                        <td id="seln_mbcr_rlim2"></td>
                                     </tr>
                                     <tr>
-                                        <th>증권사</th>
-                                        <td>미래에셋증권</td>
-                                        <td>10000</td>
-                                        <th>증권사</th>
-                                        <td>한국투자증권</td>
-                                        <td>10000</td>
+                                        <th id="shnu_mbcr_name3"></th>
+                                        <td id="total_shnu_qty3"></td>
+                                        <td id="shnu_mbcr_rlim3"></td>
+                                        <th id="seln_mbcr_name3"></th>
+                                        <td id="total_seln_qty3"></td>
+                                        <td id="seln_mbcr_rlim3"></td>
                                     </tr>
                                     <tr>
-                                        <th>증권사</th>
-                                        <td>미래에셋증권</td>
-                                        <td>10000</td>
-                                        <th>증권사</th>
-                                        <td>한국투자증권</td>
-                                        <td>10000</td>
+                                        <th id="shnu_mbcr_name4"></th>
+                                        <td id="total_shnu_qty4"></td>
+                                        <td id="shnu_mbcr_rlim4"></td>
+                                        <th id="seln_mbcr_name4"></th>
+                                        <td id="total_seln_qty4"></td>
+                                        <td id="seln_mbcr_rlim4"></td>
                                     </tr>
                                     <tr>
-                                        <th>증권사</th>
-                                        <td>미래에셋증권</td>
-                                        <td>10000</td>
-                                        <th>증권사</th>
-                                        <td>한국투자증권</td>
-                                        <td>10000</td>
+                                        <th id="shnu_mbcr_name5"></th>
+                                        <td id="total_shnu_qty5"></td>
+                                        <td id="shnu_mbcr_rlim5"></td>
+                                        <th id="seln_mbcr_name5"></th>
+                                        <td id="total_seln_qty5"></td>
+                                        <td id="seln_mbcr_rlim5"></td>
                                     </tr>
                                     <tr>
-                                        <th>매수총합</th>
-                                        <td th:colspan="2">10000</td>
-                                        <th>매도총합</th>
-                                        <td th:colspan="2">20000</td>
+                                        <th th:colspan="2">외국계 순매수</th>
+                                        <th th:colspan="2">외국계 매수</th>
+                                        <th th:colspan="2">외국계 매도</th>
+                                    </tr>
+                                    <tr>
+                                        <td th:colspan="2" id="glob_ntby_qty"></td>
+                                        <td th:colspan="2" id="glob_total_shnu_qty"></td>
+                                        <td th:colspan="2" id="glob_total_seln_qty"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -119,7 +123,7 @@
                         </div>
                     </div>
                     <div>
-                        <canvas th:id="stock_chart" th:style="'width:500px;height:400px;'"></canvas>
+                        <canvas th:id="stock_chart" th:style="'width:500px;height:500px;'"></canvas>
                     </div>
                 </div>
             </div>
@@ -370,6 +374,9 @@
                 sale_end_dt: JSONData.output.sale_end_dt
             };
             commoditySearch_Table.setData([rowData]);
+
+            document.getElementById("shtn_pdno").innerText = JSONData.output.shtn_pdno;
+            document.getElementById("prdt_abrv_name").innerText = JSONData.output.prdt_abrv_name;
         };
         RequestUrl('/api/commodity_search', 'POST', JSONparam, callback);
     }
@@ -636,6 +643,59 @@
         RequestUrl('/api/stock_chart_month', 'POST', JSONparam, callback);
     }
 
+    function memberBuySellCompanySearch(param) {
+        if(param == 'stockId') {
+            stockId = document.getElementById("stockId").value;
+        }
+        let JSONparam = {
+            stockId : stockId
+        };
+        let callback = (result) => {
+            let data = result.response;
+            let JSONData = JSON.parse(data);
+            // 컬럼에 맞게 데이터 추출
+            document.getElementById("shnu_mbcr_name1").innerText = JSONData.output.shnu_mbcr_name1;
+            document.getElementById("total_shnu_qty1").innerText = thousandComma(JSONData.output.total_shnu_qty1);
+            document.getElementById("shnu_mbcr_rlim1").innerText = JSONData.output.shnu_mbcr_rlim1 + "%";
+            document.getElementById("seln_mbcr_name1").innerText = JSONData.output.seln_mbcr_name1;
+            document.getElementById("total_seln_qty1").innerText = thousandComma(JSONData.output.total_seln_qty1);
+            document.getElementById("seln_mbcr_rlim1").innerText = JSONData.output.seln_mbcr_rlim1 + "%";
+
+            document.getElementById("shnu_mbcr_name2").innerText = JSONData.output.shnu_mbcr_name2;
+            document.getElementById("total_shnu_qty2").innerText = thousandComma(JSONData.output.total_shnu_qty2);
+            document.getElementById("shnu_mbcr_rlim2").innerText = JSONData.output.shnu_mbcr_rlim2 + "%";
+            document.getElementById("seln_mbcr_name2").innerText = JSONData.output.seln_mbcr_name2;
+            document.getElementById("total_seln_qty2").innerText = thousandComma(JSONData.output.total_seln_qty2);
+            document.getElementById("seln_mbcr_rlim2").innerText = JSONData.output.seln_mbcr_rlim2 + "%";
+
+            document.getElementById("shnu_mbcr_name3").innerText = JSONData.output.shnu_mbcr_name3;
+            document.getElementById("total_shnu_qty3").innerText = thousandComma(JSONData.output.total_shnu_qty3);
+            document.getElementById("shnu_mbcr_rlim3").innerText = JSONData.output.shnu_mbcr_rlim3 + "%";
+            document.getElementById("seln_mbcr_name3").innerText = JSONData.output.seln_mbcr_name3;
+            document.getElementById("total_seln_qty3").innerText = thousandComma(JSONData.output.total_seln_qty3);
+            document.getElementById("seln_mbcr_rlim3").innerText = JSONData.output.seln_mbcr_rlim3 + "%";
+
+            document.getElementById("shnu_mbcr_name4").innerText = JSONData.output.shnu_mbcr_name4;
+            document.getElementById("total_shnu_qty4").innerText = thousandComma(JSONData.output.total_shnu_qty4);
+            document.getElementById("shnu_mbcr_rlim4").innerText = JSONData.output.shnu_mbcr_rlim4 + "%";
+            document.getElementById("seln_mbcr_name4").innerText = JSONData.output.seln_mbcr_name4;
+            document.getElementById("total_seln_qty4").innerText = thousandComma(JSONData.output.total_seln_qty4);
+            document.getElementById("seln_mbcr_rlim4").innerText = JSONData.output.seln_mbcr_rlim4 + "%";
+
+            document.getElementById("shnu_mbcr_name5").innerText = JSONData.output.shnu_mbcr_name5;
+            document.getElementById("total_shnu_qty5").innerText = thousandComma(JSONData.output.total_shnu_qty5);
+            document.getElementById("shnu_mbcr_rlim5").innerText = JSONData.output.shnu_mbcr_rlim5 + "%";
+            document.getElementById("seln_mbcr_name5").innerText = JSONData.output.seln_mbcr_name5;
+            document.getElementById("total_seln_qty5").innerText = thousandComma(JSONData.output.total_seln_qty5);
+            document.getElementById("seln_mbcr_rlim5").innerText = JSONData.output.seln_mbcr_rlim5 + "%";
+
+            document.getElementById("glob_ntby_qty").innerText = thousandComma(JSONData.output.glob_ntby_qty);
+            document.getElementById("glob_total_shnu_qty").innerText = thousandComma(JSONData.output.glob_total_shnu_qty);
+            document.getElementById("glob_total_seln_qty").innerText = thousandComma(JSONData.output.glob_total_seln_qty);
+        };
+        RequestUrl('/api/member_buy_sell_company', 'POST', JSONparam, callback);
+    }
+
     $(function () {
         init();
         dometisStockPriceInq();
@@ -644,6 +704,7 @@
         programTradeEstimateInq();
         InvestorSearchInq();
         stockChartDayInq();
+        memberBuySellCompanySearch();
     });
 
     function stockSearch() {
@@ -652,6 +713,7 @@
         investorTrendEstimateInq('stockId');
         InvestorSearchInq('stockId');
         programTradeEstimateInq('stockId');
+        memberBuySellCompanySearch('stockId')
         stockChartDayInq();
     }
 </script>

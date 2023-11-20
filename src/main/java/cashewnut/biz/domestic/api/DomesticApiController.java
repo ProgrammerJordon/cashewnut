@@ -338,7 +338,7 @@ public class DomesticApiController {
     }
 
     //TODO: API값 순서 문제로 인해 기업별 매수매도량 분석 부분 남겨둠
-    @RequestMapping("/api/member-buy-sell-company")
+    @RequestMapping("/api/member_buy_sell_company")
     public Map<String, Object> MemberBuySellCompanySearch(@RequestBody DomesticStockDto domesticStockDto) {
         Map<String, Object> memberBuySellCompanySearchMap = new HashMap<>();
 
@@ -351,7 +351,9 @@ public class DomesticApiController {
                 param2 = domesticStockDto.getStockId();
             }
 
-            URL url = new URL(apiUrl + "?FID_COND_MRKT_DIV_CODE=" + param1 + "&FID_INPUT_ISCD=" + param2);
+            URL url = new URL(apiUrl
+                    + "?FID_COND_MRKT_DIV_CODE=" + param1
+                    + "&FID_INPUT_ISCD=" + param2);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -390,7 +392,7 @@ public class DomesticApiController {
             } else {
                 System.out.println("HTTP Request Failed with Response Code: " + responseCode);
             }
-            System.out.println("responseMap : " + memberBuySellCompanySearchMap);
+            System.out.println("memberBuySellCompanySearchMap : " + memberBuySellCompanySearchMap);
             conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
