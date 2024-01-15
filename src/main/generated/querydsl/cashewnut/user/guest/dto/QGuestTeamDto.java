@@ -3,7 +3,7 @@ package cashewnut.user.guest.dto;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.ConstructorExpression;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 
 /**
  * cashewnut.user.guest.dto.QGuestTeamDto is a Querydsl Projection type for GuestTeamDto

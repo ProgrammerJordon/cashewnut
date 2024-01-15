@@ -1,11 +1,11 @@
 .tabulator {
 }
 /* 헤더 배경색 변경 */
-.tabulator-col-content {
-    background-color: #89c2e8;
-    color: #fff;
-}
+/*.tabulator-col-content {*/
+/*    background-color: #89c2e8;*/
+/*    color: #fff;*/
+/*}*/
 
-.tabulator-row {
-    background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));
-}
+/*.tabulator-row {*/
+/*    background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));*/
+/*}*/

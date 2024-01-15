@@ -2,13 +2,10 @@ package cashewnut.user.master.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import cashewnut.common.board.faq.Faq;
-import cashewnut.common.board.notice.Notice;
-import cashewnut.common.board.qna.Qna;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
@@ -31,7 +28,7 @@ public class QMaster extends EntityPathBase<Master> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 
-    public final ListPath<Faq, cashewnut.common.faq.QFaq> faqList = this.<Faq, cashewnut.common.faq.QFaq>createList("faqList", Faq.class, cashewnut.common.faq.QFaq.class, PathInits.DIRECT2);
+    public final ListPath<cashewnut.common.board.faq.Faq, cashewnut.common.board.faq.QFaq> faqList = this.<cashewnut.common.board.faq.Faq, cashewnut.common.board.faq.QFaq>createList("faqList", cashewnut.common.board.faq.Faq.class, cashewnut.common.board.faq.QFaq.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -41,9 +38,9 @@ public class QMaster extends EntityPathBase<Master> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final ListPath<Notice, cashewnut.common.notice.QNotice> noticeList = this.<Notice, cashewnut.common.notice.QNotice>createList("noticeList", Notice.class, cashewnut.common.notice.QNotice.class, PathInits.DIRECT2);
+    public final ListPath<cashewnut.common.board.notice.Notice, cashewnut.common.board.notice.QNotice> noticeList = this.<cashewnut.common.board.notice.Notice, cashewnut.common.board.notice.QNotice>createList("noticeList", cashewnut.common.board.notice.Notice.class, cashewnut.common.board.notice.QNotice.class, PathInits.DIRECT2);
 
-    public final ListPath<Qna, cashewnut.common.qna.QQna> qnaList = this.<Qna, cashewnut.common.qna.QQna>createList("qnaList", Qna.class, cashewnut.common.qna.QQna.class, PathInits.DIRECT2);
+    public final ListPath<cashewnut.common.board.qna.Qna, cashewnut.common.board.qna.QQna> qnaList = this.<cashewnut.common.board.qna.Qna, cashewnut.common.board.qna.QQna>createList("qnaList", cashewnut.common.board.qna.Qna.class, cashewnut.common.board.qna.QQna.class, PathInits.DIRECT2);
 
     public final ListPath<cashewnut.user.membership.domain.Team, cashewnut.user.membership.domain.QTeam> teamList = this.<cashewnut.user.membership.domain.Team, cashewnut.user.membership.domain.QTeam>createList("teamList", cashewnut.user.membership.domain.Team.class, cashewnut.user.membership.domain.QTeam.class, PathInits.DIRECT2);
 
