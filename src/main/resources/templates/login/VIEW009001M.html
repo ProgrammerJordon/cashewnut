@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/prefix/head :: headfragment"></head>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
 <body>
+<div th:replace="/prefix/header :: headerfragment"></div>
+<div>
+    <div><a href="javascript:kakaLogin();"><img src="/image/login/kakao_login.png" style="width: 400px; height: 100px"></a></div>
+</div>
 
+<div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
+
+<script>
+    // 카카오 로그인 앱키 1cf7949d3eb1d9695896d35734ccd915
+    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
+    Kakao.init('1cf7949d3eb1d9695896d35734ccd915');
+    Kakao.isInitialized();
+
+    // SDK 초기화 여부를 판단합니다.
+    console.log(Kakao.isInitialized());
+
+    function kakaLogin() {
+        Kakao.Auth.authorize({
+            scope: 'profile_nickname, profile_image, account_email, gender, age_range, birthday, friends', // 동의 내역 파라미터
+            throughTalk: true, // 간편로그인 사용 여부
+            //prompt: 'select_account', // : 카카오계정 간편로그인을 요청할 때 사용, 브라우저에 카카오계정 로그인 세션이 있을 경우 자동 로그인 또는 계정 선택 화면 출력
+            redirectUri: 'http://localhost:5252/kakao/oauth/token'
+        })
+    }
+
+</script>
