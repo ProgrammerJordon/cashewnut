@@ -89,6 +89,7 @@ function listDetail(param) {
         .then(data => {
             // 서버 응답에 대한 처리
             displayBoardListDetail(data);
+            listRely();
             console.log(data);
         })
         .catch(error => {
@@ -106,6 +107,48 @@ function displayBoardListDetail(data) {
         let listItemDetail = document.createElement('li');
         listItemDetail.innerHTML = `<span id="listDetail">${board.id}</span> - <span>${board.title}</span> - <span>${board.content}</span> - <span>${board.createdBy}</span> - <span>${board.createdDate}</span> - <span>${board.lastModifiedBy}</span> - <span>${board.lastModifiedDate}</span>`;
         boardListElementDetail.appendChild(listItemDetail);
+    });
+}
+
+function listRely() {
+    let Data = {
+        id : document.getElementById('listDetail').textContent
+    }
+
+    // JSON 데이터를 서버에 전송
+    fetch('/cashflow/selelctCashflowBoardReplyList', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // 서버 응답에 대한 처리
+            displayBoardReplyListDetail(data);
+            console.log(data);
+        })
+        .catch(error => {
+            // 오류 처리
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function displayBoardReplyListDetail(data) {
+
+    const boardListElementReply = document.getElementById('replyList');
+    boardListElementReply.innerHTML = '';
+
+    data.forEach(reply => {
+        let listItemDetail = document.createElement('li');
+        listItemDetail.innerHTML = `<span id="listReply">${reply.id}</span> - <span>${reply.content}</span> - <span>${reply.createdBy}</span> - <span>${reply.createdDate}</span> - <span>${reply.lastModifiedBy}</span> - <span>${reply.lastModifiedDate}</span>`;
+        boardListElementReply.appendChild(listItemDetail);
     });
 }
 
@@ -139,7 +182,6 @@ function saveReply() {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
-
 
 
 function deleteBoard(param) {

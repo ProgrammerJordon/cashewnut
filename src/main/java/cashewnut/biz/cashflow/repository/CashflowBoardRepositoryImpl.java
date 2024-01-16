@@ -49,7 +49,7 @@ public class CashflowBoardRepositoryImpl implements CashflowBoardRepository {
 
     @Override
     public List<CashflowBoardReply> findAllReply(CashflowBoardReply cashflowBoardReply) throws Exception {
-        return em.createQuery("select cbr from CashflowBoardReply cbr where cbr.id = :id")
+        return em.createQuery("select cbr from CashflowBoardReply cbr where cbr.cashflowBoard.id = :id")
                 .setParameter("id", cashflowBoardReply.getId())
                 .getResultList();
     }

@@ -80,6 +80,9 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+    //Kakao Login
+    implementation 'com.google.code.gson:gson'
+
 }
 
 tasks.named('test') {
