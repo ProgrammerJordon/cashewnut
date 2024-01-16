@@ -48,13 +48,14 @@
                 var birthday = res.kakao_account.birthday;
 
                 console.log(email, gender, profile_nickname, profile_image, birthday);
-                //let data = {
-                //    "authObj" : authObj,
-                //    "res" : res
-                //}
-                //let callback = () => {
-                //}
-                //RequestUrl("sessionUrl", data, callback)
+                let data = {
+                    "authObj" : authObj,
+                    "res" : res
+                }
+                let callback = () => {
+                    console.log("세션 충전 시작")
+                }
+                RequestUrl("/login/kakaoSession", data, callback)
             },
             fail: function (error) {
                 alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
