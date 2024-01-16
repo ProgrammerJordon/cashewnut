@@ -3,7 +3,7 @@ html {
     width: 100vw;
     height: 100vh;
     margin : 0px;
-    background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));
+    /* background: linear-gradient(to right, rgba(6, 87, 255, 0.3), rgba(43, 143, 142, 0.145), rgba(80, 199, 30, 0.1));*/
 }
 
 img {

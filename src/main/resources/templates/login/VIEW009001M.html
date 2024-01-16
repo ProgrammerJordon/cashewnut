@@ -5,29 +5,75 @@
 <body>
 <div th:replace="/prefix/header :: headerfragment"></div>
 <div>
-    <div><a href="javascript:kakaLogin();"><img src="/image/login/kakao_login.png" style="width: 400px; height: 100px"></a></div>
+    <div><a href="javascript:kakaoLogin();"><img src="/image/login/kakao_login.png" style="width: 400px; height: 100px"></a></div>
 </div>
 
 <div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
-
 <script>
     // 카카오 로그인 앱키 1cf7949d3eb1d9695896d35734ccd915
     // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
     Kakao.init('1cf7949d3eb1d9695896d35734ccd915');
     Kakao.isInitialized();
-
     // SDK 초기화 여부를 판단합니다.
     console.log(Kakao.isInitialized());
-
-    function kakaLogin() {
+    function kakaoLogin() {
         Kakao.Auth.authorize({
             scope: 'profile_nickname, profile_image, account_email, gender, age_range, birthday, friends', // 동의 내역 파라미터
             throughTalk: true, // 간편로그인 사용 여부
-            //prompt: 'select_account', // : 카카오계정 간편로그인을 요청할 때 사용, 브라우저에 카카오계정 로그인 세션이 있을 경우 자동 로그인 또는 계정 선택 화면 출력
-            redirectUri: 'http://localhost:5252/kakao/oauth/token'
+            prompt: 'select_account', // : 카카오계정 간편로그인을 요청할 때 사용, 브라우저에 카카오계정 로그인 세션이 있을 경우 자동 로그인 또는 계정 선택 화면 출력
+            nonce: '${NONCE}', // OpenId Connect 토큰 발급
+            redirectUri: 'http://localhost:5252/home',
+        });
+        getInfo();
+        Kakao.Auth.setAccessToken(Kakao.Auth.getAccessToken());
+    }
+
+    function getInfo() {
+        Kakao.API.request({
+            url: '/v2/user/me',
+        }).then(function(response) {
+            console.log(response)
+
+            console.log('User ID:', response.id);
+            console.log('User Nickname:', response.properties.nickname);
+            console.log('User Email:', response.kakao_account.email);
+            console.log('User Gender:', response.kakao_account.gender);
+            console.log('User Age Range:', response.kakao_account.age_range);
+            console.log('User Birthday:', response.kakao_account.birthday);
+
+            // 카카오 계정 정보에 접근할 수 있습니다.
+            console.log('Kakao Account Info:', response.kakao_account);
+
+            // 카카오톡 친구 정보도 가져올 수 있습니다.
+            console.log('KakaoTalk Friends:', response.friends);
+
+        }).catch(function(error) {
+                console.error(error)
+        });
+
+        Kakao.API.request({
+            url: '/v1/user/update_profile', // 사용자 정보 저장하기
+            data: {
+                properties: {
+                    preferred_brand: 'Kakao',
+                },
+            },
+        }).then(function(response) {
+                console.log(response)
+        }).catch(function(error) {
+            console.error(error)
         })
     }
 
+    function kakaoLogout() {
+        if (!Kakao.Auth.getAccessToken()) {
+            alert("로그인을 먼저 하세요.");
+            return;
+        }
+        Kakao.Auth.logout(function () {
+            alert("로그아웃" + Kakao.Auth.getAccessToken());
+        });
+    }
 </script>

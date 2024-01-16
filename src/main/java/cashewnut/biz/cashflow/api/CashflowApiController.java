@@ -6,10 +6,8 @@ import cashewnut.biz.cashflow.dto.CashflowBoardDto;
 import cashewnut.biz.cashflow.dto.CashflowBoardReplyDto;
 import cashewnut.biz.cashflow.service.CashflowService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
