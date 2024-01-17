@@ -1,5 +1,6 @@
 package cashewnut.biz.login.controller;
 
+import cashewnut.biz.login.dto.LoginGoogleDto;
 import cashewnut.biz.login.dto.LoginKakaoDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,6 +53,33 @@ public class LoginController {
             System.out.println("birthday_type: " + session.getAttribute("birthday_type"));
             System.out.println("profile_image_url: " + session.getAttribute("profile_image_url"));
 
+
+            return "redirect:/home";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/error"; // Redirect to an error page if an exception occurs
+        }
+    }
+
+    @RequestMapping("/login/googleSession")
+    @ResponseBody
+    public String googleSession(@RequestBody LoginGoogleDto loginGoogleDto, HttpSession session) {
+        try {
+            System.out.println("data : " + loginGoogleDto);
+
+            // Check if LoginKakaoDto attributes are correctly populated
+            System.out.println("LoginKakaoDto: " + loginGoogleDto.toString());
+
+            // Set session attributes
+            session.setAttribute("Id", loginGoogleDto.getId());
+            session.setAttribute("connected_at", loginGoogleDto.getName());
+            session.setAttribute("connected_at", loginGoogleDto.getImageUrl());
+            session.setAttribute("email", loginGoogleDto.getEmail());
+
+            session.setMaxInactiveInterval(60 * 60);
+
+            // Check if session attributes are correctly set
+            System.out.println("session : " + session);
 
             return "redirect:/home";
         } catch (Exception e) {
