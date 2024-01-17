@@ -7,26 +7,26 @@ public class LoginKakaoDto {
 
     private String id;
     private String connected_at;
-    private String kakao_account;
-    private String properties;
+    private String email;
+    private String age_range;
+    private String gender;
+    private String profile_nickname;
+    private String birthday;
+    private String birthday_type;
+    private String profile_image_url;
 
     public LoginKakaoDto() {
     }
 
-    public LoginKakaoDto(String id, String connected_at, String kakao_account, String properties) {
+    public LoginKakaoDto(String id, String connected_at, String email, String age_range, String gender, String profile_nickname, String birthday, String birthday_type, String profile_image_url) {
         this.id = id;
         this.connected_at = connected_at;
-        this.kakao_account = kakao_account;
-        this.properties = properties;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginKakaoDto{" +
-                "id='" + id + '\'' +
-                ", connected_at='" + connected_at + '\'' +
-                ", kakao_account='" + kakao_account + '\'' +
-                ", properties='" + properties + '\'' +
-                '}';
+        this.email = email;
+        this.age_range = age_range;
+        this.gender = gender;
+        this.profile_nickname = profile_nickname;
+        this.birthday = birthday;
+        this.birthday_type = birthday_type;
+        this.profile_image_url = profile_image_url;
     }
 }

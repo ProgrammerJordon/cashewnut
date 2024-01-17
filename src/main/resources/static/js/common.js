@@ -35,7 +35,7 @@ function RequestUrl(url, method, data, successCallback) {
             }
         });
     } catch (error) {
-        console.error("에러 발생:", error);
+        //console.error("에러 발생:", error);
     }
 }
 
@@ -53,7 +53,7 @@ function RequestJsonUrl(url, method, data, successCallback) {
             }
         });
     } catch (error) {
-        console.error("에러 발생:", error);
+        //console.error("에러 발생:", error);
     }
 }
 

@@ -17,10 +17,9 @@ public class LoginController {
     }
 
     @RequestMapping("/login/kakaoSession")
-    @ResponseBody
-    public String kakaoSession(@RequestBody LoginKakaoDto loginKakaoDto, HttpSession session) {
+    public String kakaoSession(LoginKakaoDto loginKakaoDto, HttpSession session) {
         System.out.println("data : " + loginKakaoDto);
-        session.setAttribute("userId", loginKakaoDto.getId());
+        session.setAttribute("userId", loginKakaoDto.);
 
         return "redirect:/home";
     }
