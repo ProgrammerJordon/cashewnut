@@ -1,6 +1,7 @@
 <head th:fragment="headfragment">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name ="google-signin-client_id" content="587091627099-m8d7ok8kut3di0hdk82h43fmsconuups.apps.googleusercontent.com">
     <title>Cashewnut</title>
     <link th:href="@{/css/common.css}" type="text/css" rel="stylesheet">
     <link th:href="@{/css/tabulator.css}" type="text/css" rel="stylesheet">
@@ -9,4 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script th:src="@{/js/jquery.js}" type="text/javascript"></script>
     <script th:src="@{/js/common.js}" type="text/javascript" defer></script>
+    <script th:src="@{/js/commonModule.js}" type="text/javascript" defer></script>
+    <script th:src="@{/js/datePickerModule.js}" type="text/javascript" defer></script>
+    <script th:src="@{/js/messageModule.js}" type="text/javascript" defer></script>
+    <script th:src="@{/js/popup.js}" type="text/javascript" defer></script>
+    <script th:src="@{/js/login.js}" type="text/javascript" defer></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>

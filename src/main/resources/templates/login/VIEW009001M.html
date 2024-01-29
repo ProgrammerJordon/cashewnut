@@ -1,75 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/prefix/head :: headfragment"></head>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <body>
 <div th:replace="/prefix/header :: headerfragment"></div>
 <div>
-    <div><a href="javascript:loginWithKakao();"><img src="/image/login/kakao_login.png" style="width: 400px; height: 100px"></a></div>
+    <div><a href="javascript:loginWithKakao();"><img src="/image/login/kakao_login.png" style="width: 200px; height: 50px"></a></div>
+</div>
+
+<div>
+    <div class="g-signin2" id="googleLogin"><a href="javascript:init()"><span>Login with Google</span></a></div>
 </div>
 
 <div th:replace="/prefix/footer :: footerfragment"></div>
 </body>
 </html>
-<script>
-    // 카카오 로그인 앱키 1cf7949d3eb1d9695896d35734ccd915
-    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
-    Kakao.init('1cf7949d3eb1d9695896d35734ccd915');
-    Kakao.isInitialized();
-    // SDK 초기화 여부를 판단합니다.
-    console.log(Kakao.isInitialized());
-    function loginWithKakao() {
-        Kakao.Auth.login({
-            // scpope에 들어갈수 있는 항목
-            // name(이름), phone_number(전화번호),
-            // birthyear(생년), account_ci(연계정보), shipping_address(배송지정보), plusfriends(카카오플러스친추)
-            scope:'profile_nickname, account_email, gender, age_range, birthday, friends',
-            success: function (authObj) {
-                console.log(authObj); // access토큰 값
-                Kakao.Auth.setAccessToken(authObj.access_token); // access토큰값 저장
-                getInfo(authObj);
-            },
-            fail: function (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    function getInfo(authObj) {
-        Kakao.API.request({
-            url: '/v2/user/me',
-            success: function (res) {
-                console.log(res);
-                // 이메일, 성별, 닉네임, 프로필이미지
-                var email = res.kakao_account.email;
-                var gender = res.kakao_account.gender;
-                var profile_nickname = res.kakao_account.profile.nickname;
-                var profile_image = res.kakao_account.profile.thumbnail_image_url;
-                var birthday = res.kakao_account.birthday;
-
-                console.log(email, gender, profile_nickname, profile_image, birthday);
-                let data = {
-                    "authObj" : authObj,
-                    "res" : res
-                }
-                let callback = () => {
-                    console.log("세션 충전 시작")
-                }
-                RequestUrl("/login/kakaoSession", data, callback)
-            },
-            fail: function (error) {
-                alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
-            }
-        });
-    }
-
-    function kakaoLogout() {
-        if (!Kakao.Auth.getAccessToken()) {
-            alert('Not logged in.');
-            return;
-        }
-        Kakao.Auth.logout(function() {
-            alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
-        });
-    }
-</script>
