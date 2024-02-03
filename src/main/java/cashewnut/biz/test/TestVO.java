@@ -7,4 +7,5 @@ public class TestVO {
 
     private String Title;
     private String Content;
+    private String ttt;
 }
