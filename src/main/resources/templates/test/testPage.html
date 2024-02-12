@@ -5,11 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-환영합니다.</br>
+
+<hr>
+<p>조회하는 공간</p>
+<form action="/selectTest" method="post">
+    <button type="submit">현재 존재하는 테이블 조회하기</button>
+</form>
+<br><hr><br><br>
+
+<hr>
+<p>저장하는 공간</p>
 <form action="/insertTest" method="post">
     제목 : <input type="text" name="title"/></br>
     내용 : <input type="text" name="content"/></br>
     <button type="submit">저장</button>
 </form>
+<br><hr><br><br>
+
+<hr>
+<p>수정하는 공간</p>
+<form action="/updateTest" method="post">
+    수정 하려는 테이블 NO : <input type="text" name="no"/></br>
+    수정 하려는 제목 : <input type="text" name="title"/></br>
+    수정 하려는 내용 : <input type="text" name="content"/></br>
+    <button type="submit">수정</button>
+</form>
+<br></hr><br>
+
 </body>
 </html>

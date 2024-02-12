@@ -4,6 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TestDAO {
 
@@ -14,4 +16,11 @@ public class TestDAO {
         return this.sqlSession.insert("insertTestVO", testVO);
     }
 
+    public void updateTest(TestVO testVO) {
+        this.sqlSession.update("updateTestVO", testVO);
+    }
+
+    public List<TestVO> selectTest() {
+        return this.sqlSession.selectList("selectTest");
+    }
 }
