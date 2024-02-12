@@ -12,8 +12,10 @@ public class TestController {
     public String testView() {
         return "/test/testPage";
     }
+
     @RequestMapping("/insertTest")
     public void insertTest(TestVO testVO) throws Exception {
         testService.insertTest(testVO);
     }
+
 }
