@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,10 +21,10 @@ public class TestController {
     @RequestMapping("selectTest")
     public String selectTest(Model model) throws Exception {
 
-        List<TestVO> list = testService.selectTest();
-        model.addAttribute("list",list);
+        List<TestVO> get_list = testService.selectTest();
+        model.addAttribute("list",get_list);
 
-        System.out.println("result list : " + list);
+        System.out.println("result list : " + get_list);
 
         return "/test/select_page";
     }

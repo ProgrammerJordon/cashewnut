@@ -24,6 +24,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<TestVO> selectTest() throws Exception {
         List<TestVO> list = testDAO.selectTest();
+
         return list;
     }
 

@@ -17,7 +17,7 @@
         UPDATE TEST SET title = #{title}, content = #{content} where no = #{no}
     </update>
 
-    <select id="selectTest" parameterType="cashewnut.biz.test.TestVO">
+    <select id="selectTest" resultType="cashewnut.biz.test.TestVO">
         SELECT * FROM TEST ORDER BY NO
     </select>
 
